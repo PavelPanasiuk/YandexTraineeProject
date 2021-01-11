@@ -13,21 +13,28 @@ namespace YandexTraineeProject
     {
         private string _languageDropDownMenu = "//div/div/div/button";       
         private string _saveLanguageButtonLocator = "//div[@class='form__controls']/button";
+        private IWebDriver _driver;
 
-        public void ClickLanguageMenu(IWebDriver driver)
+        public LanguagePage(IWebDriver webDriver)
         {
-            driver.FindElement(By.XPath(_languageDropDownMenu)).Click();
+            _driver = webDriver;
         }
 
-        public void SelectUkraineLanguage(IWebDriver driver)
+
+        public void ClickLanguageMenu()
         {
-            Actions actions = new Actions(driver);
+            _driver.FindElement(By.XPath(_languageDropDownMenu)).Click();
+        }
+
+        public void SelectUkraineLanguage()
+        {
+            Actions actions = new Actions(_driver);
             actions.SendKeys(Keys.ArrowDown).SendKeys(Keys.Enter).Build().Perform();            
         }       
 
-        public void ClickSaveLanguageButton(IWebDriver driver)
+        public void ClickSaveLanguageButton()
         {
-            driver.FindElement(By.XPath(_saveLanguageButtonLocator)).Click();
+            _driver.FindElement(By.XPath(_saveLanguageButtonLocator)).Click();
         }
     }    
 }

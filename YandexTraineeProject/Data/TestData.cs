@@ -11,6 +11,6 @@ namespace YandexTraineeProject.Data
         public string LocationLondon { get; set; }
         public string LocationParis { get; set; }
         public string NotValidLoginOrPasswordMessage { get; set; }
-        
+        public string MarketSearchText { get; set; }
     }
 }

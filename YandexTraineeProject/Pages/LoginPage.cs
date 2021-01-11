@@ -8,8 +8,14 @@ namespace YandexTraineeProject
         private string _loginInputLine = "#passp-field-login";//css        
         private string _passwordInputLine = "#passp-field-passwd";//css
         private string _submitLogin = "//button[@data-t='button:action']";
+        private IWebDriver _driver;
 
-        public void LoginInput(IWebDriver _driver, string login)
+        public LoginPage(IWebDriver webDriver)
+        {
+            _driver = webDriver;
+        }
+
+        public void LoginInput(string login)
         {
             _driver.SwitchTo().Window(_driver.WindowHandles[1]);
             Thread.Sleep(1000);
@@ -17,12 +23,12 @@ namespace YandexTraineeProject
             Thread.Sleep(1000);
         }
 
-        public void ClickLoginButton(IWebDriver _driver)
+        public void ClickLoginButton()
         {
             _driver.FindElement(By.XPath(_submitLogin)).Click();
         }
 
-        public void PasswordInput(IWebDriver _driver, string password)
+        public void PasswordInput(string password)
         {
             _driver.SwitchTo().Window(_driver.WindowHandles[1]);
             Thread.Sleep(1000);

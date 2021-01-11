@@ -10,10 +10,16 @@ namespace YandexTraineeProject
 {
     [TestFixture]
     [AllureNUnit]
-    public class Location : TestsBase
-    {       
-        LocationPage _locationPage = new LocationPage();
-        MainPage _mainPage = new MainPage();
+    public class Location : TestBase
+    {
+       private LocationPage _locationPage;
+      private  MainPage _mainPage;
+
+        public Location(IWebDriver Driver)
+        {
+            _locationPage = new LocationPage(Driver);
+            _mainPage = new MainPage(Driver);
+        }
 
         InfoFromJsonFile _jsonFile = new InfoFromJsonFile();
         TestData _testData;
@@ -22,24 +28,29 @@ namespace YandexTraineeProject
         public void Setup()
         {
             _testData = _jsonFile.GetTestData();
-           // _driver.Manage().Window.Maximize();
-           // _driver.Navigate().GoToUrl(_testData.YandexUrl);
+            Driver.Navigate().GoToUrl(_testData.YandexUrl);
         }
 
         [Test]
         public void CompareElseButtonElements()
         {
-            _mainPage.ClickLocationButton(Driver);
-            _locationPage.ChangeLocation(Driver, _testData.LocationLondon);
-            var elseButtonLondon = _mainPage.GetListOfElseMenuElements(Driver);
+            _mainPage.ClickLocationButton();
+            _locationPage.ChangeLocation(_testData.LocationLondon);
+            var elseButtonLondon = _mainPage.GetListOfElseMenuElements();
             Thread.Sleep(1000);
 
-            _mainPage.ClickLocationButton(Driver);
-            _locationPage.ChangeLocation(Driver, _testData.LocationParis);
-            var elseButtonParis = _mainPage.GetListOfElseMenuElements(Driver);
+            _mainPage.ClickLocationButton();
+            _locationPage.ChangeLocation(_testData.LocationParis);
+            var elseButtonParis = _mainPage.GetListOfElseMenuElements();
             Thread.Sleep(1000);
 
             Assert.AreEqual(elseButtonLondon, elseButtonParis);
-        }        
+        }
+
+        [TearDown]
+        public void TearDown()
+        {
+            Driver.Quit();
+        }
     }
 }

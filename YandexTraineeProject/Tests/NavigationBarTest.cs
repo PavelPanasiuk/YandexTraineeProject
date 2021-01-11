@@ -10,9 +10,24 @@ namespace YandexTraineeProject
 {
     [TestFixture]
     [AllureNUnit]
-    class NavigationBarTest : TestsBase
+    class NavigationBarTest : TestBase
     {
-        MainPage _mainPage = new MainPage();
+       private MainPage _mainPage;
+
+        public NavigationBarTest()
+        {
+            _mainPage = new MainPage(Driver);
+        }
+
+        InfoFromJsonFile _jsonFile = new InfoFromJsonFile();
+        TestData _testData;        
+
+        [OneTimeSetUp]
+        public void SetUp()
+        {
+            _testData = _jsonFile.GetTestData();
+            Driver.Navigate().GoToUrl(_testData.YandexUrl);
+        }
 
         [TestCase(MainPage.ImageButton, "images")]
         [TestCase(MainPage.MapButton, "maps")]
@@ -23,7 +38,7 @@ namespace YandexTraineeProject
         [TestCase(MainPage.VideoButton, "video")]
         public void NavigationBarLink(string link, string expectedresult)
         {
-            var result = _mainPage.ClickNavigationBarButton(Driver, link);
+            var result = _mainPage.ClickNavigationBarButton(link);
             Assert.IsTrue(result.Contains(expectedresult));
         }
 
@@ -32,6 +47,5 @@ namespace YandexTraineeProject
         {
             Driver.Quit();
         }
-
     }
 }

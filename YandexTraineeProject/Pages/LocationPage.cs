@@ -7,13 +7,20 @@ namespace YandexTraineeProject
     {
         private string _locationInput = "//input[@id='city__front-input']";
         private string _firstDropDownLine = "//li[@class][1]";
+        private IWebDriver _driver;
 
-        public void ChangeLocation(IWebDriver _driver, string locationName)
+        public LocationPage(IWebDriver webDriver)
+        {
+            _driver = webDriver;
+        }
+
+
+        public void ChangeLocation(string locationName)
         {
             _driver.FindElement(By.XPath(_locationInput)).Click();
             _driver.FindElement(By.XPath(_locationInput)).Clear();
             _driver.FindElement(By.XPath(_locationInput)).SendKeys(locationName);
-            Thread.Sleep(1000);
+            Thread.Sleep(2000);
             _driver.FindElement(By.XPath(_firstDropDownLine)).Click();
 
             //ToDo: Не очень работает попробовать разобраться в чем херня и начиться нормально писать ожидания.

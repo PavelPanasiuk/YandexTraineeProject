@@ -1,39 +1,36 @@
 ﻿using System.Threading;
 using NUnit.Framework;
 using NUnit.Allure.Core;
-
-
+using OpenQA.Selenium;
 
 namespace YandexTraineeProject
 {
     [TestFixture]
     [AllureNUnit]
-    class LanguageTest : TestsBase
+    class LanguageTest : TestBase
     {
-        LanguagePage _languagePage = new LanguagePage();
-        MainPage _mainPage = new MainPage();
+        private LanguagePage _languagePage;
+        private MainPage _mainPage;
 
-
-        [SetUp]
-        public void SetUp()
+        public LanguageTest(IWebDriver driver)
         {
-            // _driver.Manage().Window.Maximize();
-            // _driver.Navigate().GoToUrl("https://yandex.by/");
+            _languagePage = new LanguagePage(Driver);
+            _mainPage = new MainPage(Driver);
         }
 
         [Test]
         public void SwitchLanguage()
         {
             Thread.Sleep(1000);
-            _mainPage.ClickLanguageButton(Driver);
+            _mainPage.ClickLanguageButton();
             Thread.Sleep(1000);
-            _mainPage.ClickLanguageOptionsButton(Driver);
+            _mainPage.ClickLanguageOptionsButton();
             Thread.Sleep(1000);
-            _languagePage.ClickLanguageMenu(Driver);
-            _languagePage.SelectUkraineLanguage(Driver);
+            _languagePage.ClickLanguageMenu();
+            _languagePage.SelectUkraineLanguage();
             Thread.Sleep(1000);
-            _languagePage.ClickSaveLanguageButton(Driver);
-            var actualLanguage = _mainPage.GetLanguageName(Driver);
+            _languagePage.ClickSaveLanguageButton();
+            var actualLanguage = _mainPage.GetLanguageName();
             Assert.AreEqual("Ukr", actualLanguage);
         }
     }

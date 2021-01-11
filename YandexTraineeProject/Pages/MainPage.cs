@@ -20,13 +20,20 @@ namespace YandexTraineeProject
         public const string MarketButton = "//a[@data-id='market']";
         public const string TranslateButton = "//a[@data-id='translate']";
         public const string MusicButton = "//a[@data-id='music']";
+        private IWebDriver _driver;
 
-        public void ClickLocationButton(IWebDriver _driver) 
+        public MainPage(IWebDriver webDriver)
+        {
+            this._driver = webDriver;
+        }
+
+
+        public void ClickLocationButton() 
         {
             _driver.FindElement(By.XPath(_location)).Click();
         }
 
-        public List<string> GetListOfElseMenuElements(IWebDriver _driver)
+        public List<string> GetListOfElseMenuElements()
         {
             _driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(5);
             List<IWebElement> elems = _driver.FindElements(By.XPath("//a[@data-id]")).ToList();
@@ -42,30 +49,31 @@ namespace YandexTraineeProject
             return listElseMenuValues;
         }
 
-        public void ClickEmailLoginButton(IWebDriver driver)
+        public void ClickEmailLoginButton()
         {
-            driver.FindElement(By.XPath(_loginEmailButtonLocator)).Click();
+            _driver.FindElement(By.XPath(_loginEmailButtonLocator)).Click();
         }
 
-        public string ClickNavigationBarButton(IWebDriver driver, string nameOfButton)
+        public string ClickNavigationBarButton( string nameOfButton)
         {
-            driver.FindElement(By.XPath(nameOfButton)).Click();
-            return driver.SwitchTo().Window(driver.WindowHandles[1]).Url;
+            _driver.FindElement(By.XPath(nameOfButton)).Click();
+            return _driver.SwitchTo().Window(_driver.WindowHandles[1]).Url;
         }
 
-        public void ClickLanguageButton(IWebDriver driver)
+        public void ClickLanguageButton()
         {
-            driver.FindElement(By.XPath(_languageButtonLocator)).Click();
+            _driver.FindElement(By.XPath(_languageButtonLocator)).Click();
         }
 
-        public void ClickLanguageOptionsButton(IWebDriver driver)
+        public void ClickLanguageOptionsButton()
         {
-            driver.FindElement(By.XPath(_languageOptionsButtonLocator)).Click();
+            _driver.FindElement(By.XPath(_languageOptionsButtonLocator)).Click();
         }
 
-        public string GetLanguageName(IWebDriver driver)
+        public string GetLanguageName()
         {
-            return driver.FindElement(By.XPath("//div[@class='col headline__bar-item b-langs']/div/a[@title]")).Text;
+            Thread.Sleep(1000);
+            return _driver.FindElement(By.XPath("//div[@class='col headline__bar-item b-langs']/div/a[@title]")).Text;
         }
     }
 }
