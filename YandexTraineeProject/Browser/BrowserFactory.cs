@@ -1,16 +1,15 @@
 ﻿using System;
-using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
 
 namespace YandexTraineeProject
 {
-    public class BaseBrowser
+    public class BrowserFactory
     {
-        public IWebDriver GetBrowser(BrowserType browserType)
+        public IWebDriver GetDriver(BrowserType type)
         {
-            switch (browserType)
+            switch (type)
             {
                 case BrowserType.Chrome:
                     return new ChromeDriver();

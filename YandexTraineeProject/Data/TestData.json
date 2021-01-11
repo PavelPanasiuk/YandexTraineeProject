@@ -1,0 +1,13 @@
+﻿{
+
+    "yandexUrl" : "https://yandex.by/",
+    "validLogin" : "AutotestUser",
+    "validPassword" : "AutotestUser123",        
+    "notValidPassword" : "NoAutotestUser123",
+    "notValidLogin" : "NoAutotestUser",
+    "locationLondon" : "Лондон",
+    "locationParis" : "Париж",
+    "notValidLoginOrPasswordMessage":"//div[@class='Textinput-Hint Textinput-Hint_state_error']"    
+}
+
+
