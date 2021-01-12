@@ -1,9 +1,6 @@
 ﻿using System;
 using OpenQA.Selenium;
 using NUnit.Framework;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Firefox;
-using YandexTraineeProject.Data;
 
 namespace YandexTraineeProject
 {
@@ -29,6 +26,5 @@ namespace YandexTraineeProject
         {
             Driver.Quit();
         }
-
     }
 }

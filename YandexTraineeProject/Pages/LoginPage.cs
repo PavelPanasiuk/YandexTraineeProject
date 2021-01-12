@@ -1,5 +1,7 @@
 ﻿using OpenQA.Selenium;
 using System.Threading;
+using OpenQA.Selenium.Support.UI;
+using System;
 
 namespace YandexTraineeProject
 {
@@ -18,9 +20,8 @@ namespace YandexTraineeProject
         public void LoginInput(string login)
         {
             _driver.SwitchTo().Window(_driver.WindowHandles[1]);
-            Thread.Sleep(1000);
-            _driver.FindElement(By.CssSelector(_loginInputLine)).SendKeys(login);
-            Thread.Sleep(1000);
+            new WebDriverWait(_driver, TimeSpan.FromSeconds(10))
+                .Until(ExpectedConditions.ElementToBeClickable(By.CssSelector(_loginInputLine))).SendKeys(login);
         }
 
         public void ClickLoginButton()
@@ -31,9 +32,14 @@ namespace YandexTraineeProject
         public void PasswordInput(string password)
         {
             _driver.SwitchTo().Window(_driver.WindowHandles[1]);
-            Thread.Sleep(1000);
-            _driver.FindElement(By.CssSelector(_passwordInputLine)).SendKeys(password);
-            Thread.Sleep(1000);
+            new WebDriverWait(_driver, TimeSpan.FromSeconds(10))
+                 .Until(ExpectedConditions.ElementToBeClickable(By.CssSelector(_passwordInputLine))).SendKeys(password);
+        }
+
+        public string GetErrorMessage(string locator)
+        {
+            return new WebDriverWait(_driver, TimeSpan.FromSeconds(10))
+                 .Until(ExpectedConditions.ElementExists(By.XPath(locator))).Text;
         }
     }
 }

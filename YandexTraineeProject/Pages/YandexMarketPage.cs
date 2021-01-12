@@ -1,8 +1,9 @@
 ﻿using System;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using OpenQA.Selenium;
 
 namespace YandexTraineeProject
 {
@@ -10,7 +11,6 @@ namespace YandexTraineeProject
     {
         private string _searchLineLocator = "//input[@type='text']";
         private string _serchButtonLocator = "//button[@type='submit']";
-        private string _elementFromSearchResult = "//article";
         private string _compariButtonLocator = "//div[@class='_3oDLePObQ1']/*";
         private IWebDriver _driver;
 
@@ -19,10 +19,10 @@ namespace YandexTraineeProject
             _driver = driver;
         }
 
-
         public void ClickSearchLine()
         {
-            _driver.FindElement(By.XPath(_searchLineLocator)).Click();
+            new WebDriverWait(_driver, TimeSpan.FromSeconds(10))
+                .Until(ExpectedConditions.ElementToBeClickable(By.XPath(_searchLineLocator))).Click();
         }
 
         public void InputSearchText(string input)
@@ -32,23 +32,27 @@ namespace YandexTraineeProject
 
         public void ClickSearchButton()
         {
-            _driver.FindElement(By.XPath(_serchButtonLocator)).Click();
-        }        
+            new WebDriverWait(_driver, TimeSpan.FromSeconds(10))
+                .Until(ExpectedConditions.ElementToBeClickable(By.XPath(_serchButtonLocator))).Click();
+        }
 
         public void AddProductsForComparison()
-        {          
-
-            for (int i = 1; i <=2 ; i++)
+        {
+            for (int i = 1; i <= 2; i++)
             {
-               _driver.FindElement(By.XPath($"//article[{i}]//div[@class='_1CXljk9rtd']")).Click();
+                _driver.FindElement(By.XPath($"//article[{i}]//div[@class='_1CXljk9rtd']")).Click();
             }
         }
 
         public void ClickCompariButton()
         {
-            _driver.FindElement(By.XPath("//div[@class='_3oDLePObQ1']/*")).Click();
+            new WebDriverWait(_driver, TimeSpan.FromSeconds(10))
+                .Until(ExpectedConditions.ElementToBeClickable(By.XPath(_compariButtonLocator))).Click();
         }
 
-
+        public List<IWebElement> GetListOfProductsForComparison()
+        {           
+           return _driver.FindElements(By.CssSelector(".e910RKmlsj")).ToList();           
+        }
     }
 }

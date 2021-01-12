@@ -1,15 +1,12 @@
 ﻿using NUnit.Framework;
-using OpenQA.Selenium;
-using System.Threading;
 using YandexTraineeProject.Data;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Firefox;
 using NUnit.Allure.Core;
 
 namespace YandexTraineeProject
 {
     [AllureNUnit]
-    public class EmailTest : TestBase
+    [TestFixture]
+    public class EmailTest : TestBase  //ToDo Открывать новый браузер перед каждым тестом та как запоминает пользователя
     {
         private MainPage _mainPage;
         private EmailPage _emailPage;
@@ -17,8 +14,6 @@ namespace YandexTraineeProject
         private InfoFromJsonFile _jsonFile;
         private TestData _testData;
 
-        // InfoFromJsonFile _jsonFile = new InfoFromJsonFile();
-        //TestData _testData;
         public EmailTest()
         {
             _mainPage = new MainPage(Driver);
@@ -44,7 +39,7 @@ namespace YandexTraineeProject
             _loginPage.PasswordInput(_testData.ValidPassword);
             _loginPage.ClickLoginButton();
             var userName = _emailPage.GetUserName();
-            Assert.AreEqual("AutotestUser", userName);
+            Assert.AreEqual(_testData.ValidLogin, userName);
         }
 
         [Test]
@@ -55,7 +50,6 @@ namespace YandexTraineeProject
             _loginPage.ClickLoginButton();
             _loginPage.PasswordInput(_testData.ValidPassword);
             _loginPage.ClickLoginButton();
-            Thread.Sleep(2000);
             var emailPageUrl = Driver.Url;
             _emailPage.LogOut();
             var currentUrl = Driver.Url;
@@ -70,8 +64,7 @@ namespace YandexTraineeProject
             _loginPage.ClickLoginButton();
             _loginPage.PasswordInput(_testData.NotValidPassword);
             _loginPage.ClickLoginButton();
-            Thread.Sleep(2000);
-            var errorText = Driver.FindElement(By.XPath(_testData.NotValidLoginOrPasswordMessage)).Text;
+            var errorText = _loginPage.GetErrorMessage(_testData.NotValidLoginOrPasswordMessage);
             Assert.IsNotNull(errorText);
         }
 
@@ -81,8 +74,7 @@ namespace YandexTraineeProject
             _mainPage.ClickEmailLoginButton();
             _loginPage.LoginInput(_testData.NotValidLogin);
             _loginPage.ClickLoginButton();
-            Thread.Sleep(2000);
-            var errorText = Driver.FindElement(By.XPath(_testData.NotValidLoginOrPasswordMessage)).Text;
+            var errorText = _loginPage.GetErrorMessage(_testData.NotValidLoginOrPasswordMessage);
             Assert.IsNotNull(errorText);
         }
     }

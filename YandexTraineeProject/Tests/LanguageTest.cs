@@ -1,7 +1,6 @@
-﻿using System.Threading;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using NUnit.Allure.Core;
-using OpenQA.Selenium;
+using YandexTraineeProject.Data;
 
 namespace YandexTraineeProject
 {
@@ -11,24 +10,31 @@ namespace YandexTraineeProject
     {
         private LanguagePage _languagePage;
         private MainPage _mainPage;
+        private InfoFromJsonFile _jsonFile;
+        private TestData _testData;
 
-        public LanguageTest(IWebDriver driver)
+        public LanguageTest()
         {
             _languagePage = new LanguagePage(Driver);
             _mainPage = new MainPage(Driver);
+            _jsonFile = new InfoFromJsonFile();
+            _testData = _jsonFile.GetTestData();
+        }
+
+        [SetUp]
+        public void Setup()
+        {
+            Driver.Manage().Window.Maximize();
+            Driver.Navigate().GoToUrl(_testData.YandexUrl);
         }
 
         [Test]
         public void SwitchLanguage()
         {
-            Thread.Sleep(1000);
             _mainPage.ClickLanguageButton();
-            Thread.Sleep(1000);
             _mainPage.ClickLanguageOptionsButton();
-            Thread.Sleep(1000);
             _languagePage.ClickLanguageMenu();
             _languagePage.SelectUkraineLanguage();
-            Thread.Sleep(1000);
             _languagePage.ClickSaveLanguageButton();
             var actualLanguage = _mainPage.GetLanguageName();
             Assert.AreEqual("Ukr", actualLanguage);

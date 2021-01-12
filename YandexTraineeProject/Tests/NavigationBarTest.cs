@@ -1,10 +1,6 @@
 ﻿using NUnit.Framework;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
 using YandexTraineeProject.Data;
 using NUnit.Allure.Core;
-using System.Threading;
-using OpenQA.Selenium.Interactions;
 
 namespace YandexTraineeProject
 {
@@ -12,20 +8,22 @@ namespace YandexTraineeProject
     [AllureNUnit]
     class NavigationBarTest : TestBase
     {
-       private MainPage _mainPage;
+        private MainPage _mainPage;
+        private InfoFromJsonFile _jsonFile;
+        private TestData _testData;
 
         public NavigationBarTest()
         {
             _mainPage = new MainPage(Driver);
+            _jsonFile = new InfoFromJsonFile();
+            _testData = _jsonFile.GetTestData();
         }
-
-        InfoFromJsonFile _jsonFile = new InfoFromJsonFile();
-        TestData _testData;        
 
         [OneTimeSetUp]
         public void SetUp()
         {
             _testData = _jsonFile.GetTestData();
+            Driver.Manage().Window.Maximize();
             Driver.Navigate().GoToUrl(_testData.YandexUrl);
         }
 
@@ -38,8 +36,11 @@ namespace YandexTraineeProject
         [TestCase(MainPage.VideoButton, "video")]
         public void NavigationBarLink(string link, string expectedresult)
         {
-            var result = _mainPage.ClickNavigationBarButton(link);
-            Assert.IsTrue(result.Contains(expectedresult));
+            _mainPage.ClickNavigationBarButton(link);
+            var currentUrl = Driver.SwitchTo().Window(Driver.WindowHandles[1]).Url;
+            Assert.IsTrue(currentUrl.Contains(expectedresult));
+            Driver.Close();
+            Driver.SwitchTo().Window(Driver.WindowHandles[0]);
         }
 
         [OneTimeTearDown]
