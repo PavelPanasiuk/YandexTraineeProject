@@ -4,13 +4,14 @@ using System.Threading;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using System;
 
 namespace YandexTraineeProject
 {
-    class YandexMusicPage
+    public class YandexMusicPage
     {
         private IWebDriver _driver;
+        WaitElement waitElement = new WaitElement();
 
         public YandexMusicPage(IWebDriver driver)
         {
@@ -19,17 +20,18 @@ namespace YandexTraineeProject
 
         public void ClickSearchLine()
         {
-            _driver.FindElement(By.XPath("//div[@class='head__search']/*/*/*[1]")).Click();
+            waitElement.IsElementClickable(_driver, By.XPath("//div[@class='head__search']/*/*/*[1]")).Click();
         }
 
         public void GetInputToSearchLine(string singer)
         {
-            _driver.FindElement(By.XPath("//div[@class='head__search']/*/*/*[1]")).SendKeys(singer);
+            waitElement.IsElementClickable(_driver, By.XPath("//div[@class='head__search']/*/*/*[1]")).SendKeys(singer);
         }
 
         public void ClosePopUpMenu()
         {
-            _driver.FindElement(By.XPath("//span[@class='d-icon deco-icon d-icon_cross-big  local-icon-theme-black']")).Click();
+            waitElement.IsElementClickable(_driver, By.XPath("//span[@class='d-icon deco-icon d-icon_cross-big  local-icon-theme-black']"))
+                .Click();
         }
 
         public void ChooseFirstLineDropDownLine()
@@ -40,7 +42,7 @@ namespace YandexTraineeProject
 
         public string GetArtistName()
         {
-            return _driver.FindElement(By.XPath("//h1")).Text;
+            return waitElement.IsElementExist(_driver, By.XPath("//h1")).Text;
         }
 
         public bool GetListOfPopularAlbums()
@@ -64,49 +66,18 @@ namespace YandexTraineeProject
             return result;
         }
 
-        public void ClickFirstPopularSong()
+        public void ClickStopAndPlayFirstPopularSong()
         {
-            _driver.FindElement(By.XPath("//div[@data-card='top_tracks']/*[1]")).Click();
-        }
-
-        public void MoveMouseToElement()
-        {
-            IWebElement elem = _driver.FindElement(By.XPath("//button[@data-idx='27995']/*[1]"));
-            Actions action = new Actions(_driver);
-            action.MoveToElement(elem).Click().Build().Perform();
-        }
-
-        public void JSexecutor()
-        {
-            var elem = _driver.FindElement(By.XPath("//button[@class='button-play button2 button2_rounded button2_w-icon local-icon-theme-white page-artist__play button-play__type_artist']"));
+            var elem = _driver.FindElement(By.XPath("//span[text()='Слушать']"));
             IJavaScriptExecutor js = (IJavaScriptExecutor)_driver;
-            js.ExecuteAsyncScript("arguments[0].click();",elem);
-            MakeScreenShot();
-            Thread.Sleep(1000);
-            js.ExecuteAsyncScript("arguments[0].click();", elem);
-            MakeScreenShot1();
-
-            // string title = (string)js.ExecuteScript("return document.title");
-        }
-
-        public void ClickToStartButtonFirstPopularSong()
-        {
-            _driver.FindElement(By.XPath("//button[@data-idx='27995']/*[1]")).Click();
+            js.ExecuteScript("arguments[0].click();", elem);
         }
 
         public void MakeScreenShot()
         {
+            Random random = new Random();
             Screenshot ss = ((ITakesScreenshot)_driver).GetScreenshot();
-            ss.SaveAsFile(@"E:\windowCondition1.jpeg");
+            ss.SaveAsFile($"E:\\windowCondition{random.Next()}.jpeg");
         }
-
-        public void MakeScreenShot1()
-        {
-            Screenshot ss = ((ITakesScreenshot)_driver).GetScreenshot();
-            ss.SaveAsFile(@"E:\windowCondition2.jpeg");
-        }
-
-
-
     }
 }

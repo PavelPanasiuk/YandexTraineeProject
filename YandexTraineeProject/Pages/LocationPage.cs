@@ -6,7 +6,7 @@ using OpenQA.Selenium.Interactions;
 
 namespace YandexTraineeProject
 {
-    class LocationPage
+    public class LocationPage
     {
         private string _locationInput = "//input[@id='city__front-input']";
         private string _firstDropDownLine = "//li[@class][1]";
@@ -24,7 +24,6 @@ namespace YandexTraineeProject
             _driver.FindElement(By.XPath(_locationInput)).Clear();
             _driver.FindElement(By.XPath(_locationInput)).SendKeys(locationName);
             waitElement.IsElementVisible(_driver, By.XPath(_firstDropDownLine));
-            waitElement.IsElementClickable(_driver, By.XPath(_firstDropDownLine)).Click();              
         }
 
         public void SelectLocation()

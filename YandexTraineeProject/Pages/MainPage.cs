@@ -6,7 +6,7 @@ using OpenQA.Selenium.Support.UI;
 
 namespace YandexTraineeProject
 {
-    class MainPage
+    public class MainPage
     {
         private string _elseButtonLocator = "//div[text()='ещё']";
         private string _location = "//span[@class ='geolink__reg']";
@@ -21,6 +21,7 @@ namespace YandexTraineeProject
         public const string TranslateButton = "//a[@data-id='translate']";
         public const string MusicButton = "//a[@data-id='music']";
         private IWebDriver _driver;
+
         WaitElement waitElement = new WaitElement();
 
         public MainPage(IWebDriver webDriver)

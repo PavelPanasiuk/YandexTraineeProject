@@ -6,17 +6,17 @@ using System.Text;
 
 namespace YandexTraineeProject
 {
-    class WaitElement
+    public class WaitElement
     {
         public IWebElement IsElementClickable(IWebDriver driver, By locator)
         {
             try
             {
-               return new WebDriverWait(driver, TimeSpan.FromSeconds(20))
-                .Until(ExpectedConditions.ElementToBeClickable(locator));                
+                return new WebDriverWait(driver, TimeSpan.FromSeconds(20))
+                 .Until(ExpectedConditions.ElementToBeClickable(locator));
             }
             catch (TimeoutException ex)
-            {                
+            {
                 throw new TimeoutException($"Timed out waiting\n", ex);
             }
         }
@@ -34,8 +34,21 @@ namespace YandexTraineeProject
             }
         }
 
+        public IWebElement IsElementExist(IWebDriver driver, By locator)
+        {
+            try
+            {
+                return new WebDriverWait(driver, TimeSpan.FromSeconds(20))
+                 .Until(ExpectedConditions.ElementExists(locator));
+            }
+            catch (TimeoutException ex)
+            {
+                throw new TimeoutException($"Timed out waiting\n", ex);
+            }
+        }
+
     }
 
-    
+
 }
 

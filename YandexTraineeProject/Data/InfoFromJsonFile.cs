@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace YandexTraineeProject.Data
 {
-    class InfoFromJsonFile
+    public class InfoFromJsonFile
     {
         private string _pathToLoginData;
         private string _loginTestDataFileName;

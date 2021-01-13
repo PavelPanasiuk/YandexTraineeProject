@@ -6,7 +6,7 @@ using YandexTraineeProject.Data;
 
 namespace YandexTraineeProject
 {
-    class LanguagePage
+    public class LanguagePage
     {
         private string _languageDropDownMenu = "//div/div/div/button";
         private string _saveLanguageButtonLocator = "//div[@class='form__controls']/button";
@@ -23,7 +23,7 @@ namespace YandexTraineeProject
             waitElement.IsElementClickable(_driver, By.XPath(_languageDropDownMenu)).Click();
         }
 
-        public void SelectLanguage( LanguageType language)
+        public void SelectLanguage(LanguageType language)
         {
             var map = new Dictionary<LanguageType, string>
             {

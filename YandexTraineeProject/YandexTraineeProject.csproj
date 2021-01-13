@@ -21,9 +21,17 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="Data\TestData.json">
+    <None Update="Data\TestData.json" />
+    <None Update=".runsettings">
+      <Generator>SettingsSingleFileGenerator</Generator>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
+
+  <!--<ItemGroup>
+    <None Update=".runsettingsChrome">
+      <Generator>SettingsSingleFileGenerator</Generator>
+    </None>
+  </ItemGroup>-->
 
 </Project>

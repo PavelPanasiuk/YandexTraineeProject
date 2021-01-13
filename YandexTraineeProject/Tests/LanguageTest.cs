@@ -6,7 +6,7 @@ namespace YandexTraineeProject
 {
     [TestFixture]
     [AllureNUnit]
-    class LanguageTest : TestBase
+    public class LanguageTest : TestBase
     {
         private LanguagePage _languagePage;
         private MainPage _mainPage;
@@ -34,10 +34,10 @@ namespace YandexTraineeProject
             _mainPage.ClickLanguageButton();
             _mainPage.ClickLanguageOptionsButton();
             _languagePage.ClickLanguageMenu();
-            _languagePage.SelectLanguage(LanguageType.Belarussian);
+            _languagePage.SelectLanguage(LanguageType.Ukranian);
             _languagePage.ClickSaveLanguageButton();
             var actualLanguage = _mainPage.GetLanguageName();
-            Assert.AreEqual("Bel", actualLanguage);
+            Assert.AreEqual("Ukr", actualLanguage);
         }
     }
 }

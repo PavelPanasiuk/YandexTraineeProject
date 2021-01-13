@@ -5,7 +5,7 @@ using System;
 
 namespace YandexTraineeProject
 {
-    class LoginPage
+    public class LoginPage
     {
         private string _loginInputLine = "#passp-field-login";//css        
         private string _passwordInputLine = "#passp-field-passwd";//css

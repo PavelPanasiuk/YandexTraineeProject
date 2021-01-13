@@ -1,7 +1,7 @@
 ﻿
 namespace YandexTraineeProject.Data
 {
-    class TestData
+    public class TestData
     {
         public string YandexUrl { get; set; }
         public string ValidLogin { get; set; }
@@ -13,7 +13,7 @@ namespace YandexTraineeProject.Data
         public string NotValidLoginOrPasswordMessage { get; set; }
         public string MarketSearchText { get; set; }
         public string FridgeWidth { get; set; }
-       public string MusicInputMetal { get; set; }
-         public string MusicInputBeyo { get; set; }
+        public string MusicInputMetal { get; set; }
+        public string MusicInputBeyo { get; set; }
     }
 }

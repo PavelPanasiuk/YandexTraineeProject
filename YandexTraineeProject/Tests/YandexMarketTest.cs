@@ -10,7 +10,7 @@ namespace YandexTraineeProject
 {
     [TestFixture]
     [AllureNUnit]
-    class YandexMarketTest : TestBase
+    public class YandexMarketTest : TestBase
     {
         private MainPage _mainPage;
         private YandexMarketPage _yandexMarketPage;
@@ -33,7 +33,7 @@ namespace YandexTraineeProject
         }
 
         [Test]
-        public void ComparisonTwoProducts()//ToDo не жмет кнопку добавить для сравнения
+        public void ComparisonTwoProducts()
         {
             _mainPage.ClickNavigationBarButton(MainPage.MarketButton);
             Driver.SwitchTo().Window(Driver.WindowHandles[1]);
@@ -47,7 +47,7 @@ namespace YandexTraineeProject
         }
 
         [Test]
-        public void DeleteComparisonProducts()//ToDo не жмет кнопку добавить для сравнения
+        public void DeleteComparisonProducts()
         {
             _mainPage.ClickNavigationBarButton(MainPage.MarketButton);
             Driver.SwitchTo().Window(Driver.WindowHandles[1]);
@@ -75,7 +75,7 @@ namespace YandexTraineeProject
         }
 
         [Test]
-        public void SortingFridgeByTag() //ToDo не жмет кнопку ввода ширины
+        public void SortingFridgeByTag()
         {
             _mainPage.ClickNavigationBarButton(MainPage.MarketButton);
             Driver.SwitchTo().Window(Driver.WindowHandles[1]);

@@ -32,7 +32,7 @@ namespace YandexTraineeProject
 
         [Test]
         public void OpenEmail_CheckUserName()
-        {
+        {            
             _mainPage.ClickEmailLoginButton();
             _loginPage.LoginInput(_testData.ValidLogin);
             _loginPage.ClickLoginButton();

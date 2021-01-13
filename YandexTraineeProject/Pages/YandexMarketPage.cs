@@ -8,7 +8,7 @@ using System.Threading;
 
 namespace YandexTraineeProject
 {
-    class YandexMarketPage
+    public class YandexMarketPage
     {
         private string _searchLineLocator = "//input[@type='text']";
         private string _serchButtonLocator = "//button[@type='submit']";
@@ -19,9 +19,8 @@ namespace YandexTraineeProject
         private string _byPriceButtonLocator = "//button[text()='по цене']";
         private string _householAppliancesCategoryButtonLocator = "//div[text()='Бытовая техника']";
         private string _fridgeButtonLocator = "//span[text()='Холодильники'][1]";
-        private string _frigeWidthInputLine = "#textfield9342528263";
-        private string _sortByWidthMessage = "[data-tid='75993b0d']";
         private IWebDriver _driver;
+        WaitElement waitElement = new WaitElement();
 
         public YandexMarketPage(IWebDriver driver)
         {
@@ -30,35 +29,32 @@ namespace YandexTraineeProject
 
         public void ClickSearchLine()
         {
-            new WebDriverWait(_driver, TimeSpan.FromSeconds(10))
-                .Until(ExpectedConditions.ElementToBeClickable(By.XPath(_searchLineLocator))).Click();
+            waitElement.IsElementClickable(_driver, By.XPath(_searchLineLocator)).Click();
         }
 
         public void InputSearchText(string input)
         {
-            _driver.FindElement(By.XPath(_searchLineLocator)).SendKeys(input);
+            waitElement.IsElementClickable(_driver, By.XPath(_searchLineLocator)).SendKeys(input);
         }
 
         public void ClickSearchButton()
         {
-            new WebDriverWait(_driver, TimeSpan.FromSeconds(10))
-                .Until(ExpectedConditions.ElementToBeClickable(By.XPath(_serchButtonLocator))).Click();
+            waitElement.IsElementClickable(_driver, By.XPath(_serchButtonLocator)).Click();
         }
 
         public void AddProductsForComparison()
         {
-            for (int i = 1; i < 2; i++)
+            IJavaScriptExecutor js = (IJavaScriptExecutor)_driver;
+            for (int i = 1; i <= 2; i++)
             {
-                new WebDriverWait(_driver, TimeSpan.FromSeconds(10))
-                .Until(ExpectedConditions.ElementToBeClickable(By.XPath($"//article[{i}]//div[@class='_1CXljk9rtd']"))).Click();
-                //_driver.FindElement(By.XPath($"//article[{i}]//div[@class='_1CXljk9rtd']"));
+                var elem = _driver.FindElement(By.XPath($"//article[{i}]//div[@class='_1CXljk9rtd']"));
+                js.ExecuteScript("arguments[0].click();", elem);
             }
         }
 
         public void ClickCompariButton()
         {
-            new WebDriverWait(_driver, TimeSpan.FromSeconds(10))
-                .Until(ExpectedConditions.ElementToBeClickable(By.XPath(_compariButtonLocator))).Click();
+            waitElement.IsElementClickable(_driver, By.XPath(_compariButtonLocator)).Click();
         }
 
         public List<IWebElement> GetListOfProductsForComparison()
@@ -68,28 +64,23 @@ namespace YandexTraineeProject
 
         public void ClickDeleteAllProductsFromComparisonListButton()
         {
-            new WebDriverWait(_driver, TimeSpan.FromSeconds(10))
-                 .Until(ExpectedConditions.ElementToBeClickable(By.XPath(_deleteListButtonLocator))).Click();
+            waitElement.IsElementClickable(_driver, By.XPath(_deleteListButtonLocator)).Click();
         }
 
         public void ClickElectronikCategory()
         {
-            _driver.FindElement(By.XPath("//span[text()='Понятно']")).Click();
-            Thread.Sleep(1000);
-            new WebDriverWait(_driver, TimeSpan.FromSeconds(10))
-                .Until(ExpectedConditions.ElementToBeClickable(By.XPath(_electronikCategoryButtonLocator))).Click();
+            waitElement.IsElementClickable(_driver, By.XPath("//span[text()='Понятно']")).Click();
+            waitElement.IsElementClickable(_driver, By.XPath(_electronikCategoryButtonLocator)).Click();
         }
 
         public void ClickTabletButton()
         {
-            new WebDriverWait(_driver, TimeSpan.FromSeconds(10))
-                .Until(ExpectedConditions.ElementToBeClickable(By.XPath(_tabletButtonLocator))).Click();
+            waitElement.IsElementClickable(_driver, By.XPath(_tabletButtonLocator)).Click();
         }
 
         public void ClickSortingButtonByPrice()
         {
-            new WebDriverWait(_driver, TimeSpan.FromSeconds(10))
-                 .Until(ExpectedConditions.ElementToBeClickable(By.XPath(_byPriceButtonLocator))).Click();
+            waitElement.IsElementClickable(_driver, By.XPath(_byPriceButtonLocator)).Click();
         }
 
         public void SortPriceListDescending()
@@ -103,41 +94,39 @@ namespace YandexTraineeProject
 
         public string GetTypeOfPriceSorting()
         {
-            return _driver.FindElement(By.XPath(_byPriceButtonLocator)).GetAttribute("data-autotest-id");
+            return waitElement.IsElementExist(_driver, By.XPath(_byPriceButtonLocator)).GetAttribute("data-autotest-id");
         }
 
         public void ClickHouseholAppliancesCategory()
         {
-            new WebDriverWait(_driver, TimeSpan.FromSeconds(10))
-                 .Until(ExpectedConditions.ElementToBeClickable(By.XPath(_householAppliancesCategoryButtonLocator))).Click();
+            waitElement.IsElementClickable(_driver, By.XPath(_householAppliancesCategoryButtonLocator)).Click();
+        }
+
+        public void ClosePopUpMenu()
+        {
+            waitElement.IsElementClickable(_driver, By.XPath("//div/button[@data-tid-prop]/span[text()='Да, верно']")).Click();
+            waitElement.IsElementClickable(_driver, By.XPath("//span[text()='Дальше']")).Click();
+            waitElement.IsElementClickable(_driver, By.XPath("//span[text()='Хорошо']")).Click();
         }
 
         public void ClickFridgeButton()
         {
-            _driver.FindElement(By.XPath("//div/button[@data-tid-prop]/span[text()='Да, верно']")).Click();
-            Thread.Sleep(1000);
-            _driver.FindElement(By.XPath("//span[text()='Дальше']")).Click();
-            Thread.Sleep(1000);
-            _driver.FindElement(By.XPath("//span[text()='Хорошо']")).Click();
-            Thread.Sleep(1000);
-            _driver.FindElement(By.XPath(_fridgeButtonLocator)).Click();
-            // new WebDriverWait(_driver, TimeSpan.FromSeconds(10))
-            //    .Until(ExpectedConditions.ElementToBeClickable(By.XPath(_fridgeButtonLocator))).Click();
+            waitElement.IsElementClickable(_driver, By.XPath(_fridgeButtonLocator)).Click();
         }
 
         public void ClickFridgeWidthLine()
         {
-            _driver.FindElement(By.XPath("//label[text()='до 91,2']")).Click();
+            waitElement.IsElementClickable(_driver, By.XPath("//div[@class='b_2rWdZSWQdz b_nkiJ02woLW'][8]//span[2]//input")).Click();
         }
 
         public void IputFridgeWidth(string width)
         {
-            _driver.FindElement(By.CssSelector(_frigeWidthInputLine)).SendKeys(width);
+            waitElement.IsElementClickable(_driver, By.XPath("//div[@class='b_2rWdZSWQdz b_nkiJ02woLW'][8]//span[2]//input")).SendKeys(width);
         }
 
         public string GetTagMessage()
         {
-            return _driver.FindElement(By.CssSelector("[data-tid='75993b0d']")).Text;
+            return waitElement.IsElementExist(_driver, By.CssSelector("[data-tid='75993b0d']")).Text;
         }
     }
 }

@@ -5,7 +5,7 @@ using System;
 
 namespace YandexTraineeProject
 {
-    class EmailPage
+    public class EmailPage
     {
         private string _userName = "//span[text()='AutotestLogin']";
         private string _accountOptionsButton = "//span[@class='user-account__name'][1]";
@@ -20,16 +20,21 @@ namespace YandexTraineeProject
 
         public string GetUserName()
         {
-            _driver.SwitchTo().Window(_driver.WindowHandles[1]);            
+            _driver.SwitchTo().Window(_driver.WindowHandles[1]);
             waitElement.IsElementVisible(_driver, By.XPath(_userName));
             return _driver.FindElement(By.XPath(_userName)).Text;
         }
 
         public void LogOut()
         {
-            _driver.SwitchTo().Window(_driver.WindowHandles[1]);           
-            waitElement.IsElementClickable(_driver, By.XPath(_accountOptionsButton)).Click();            
+            _driver.SwitchTo().Window(_driver.WindowHandles[1]);
+            waitElement.IsElementClickable(_driver, By.XPath(_accountOptionsButton)).Click();
             waitElement.IsElementClickable(_driver, By.XPath(_exitButton)).Click();
+        }
+
+        public void GoToMainPage()
+        {
+
         }
     }
 }

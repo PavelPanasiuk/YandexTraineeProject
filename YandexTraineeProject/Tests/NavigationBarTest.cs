@@ -6,7 +6,7 @@ namespace YandexTraineeProject
 {
     [TestFixture]
     [AllureNUnit]
-    class NavigationBarTest : TestBase
+    public class NavigationBarTest : TestBase
     {
         private MainPage _mainPage;
         private InfoFromJsonFile _jsonFile;
@@ -39,8 +39,7 @@ namespace YandexTraineeProject
             _mainPage.ClickNavigationBarButton(link);
             var currentUrl = Driver.SwitchTo().Window(Driver.WindowHandles[1]).Url;
             Assert.IsTrue(currentUrl.Contains(expectedresult));
-            Driver.Close();
-            Driver.SwitchTo().Window(Driver.WindowHandles[0]);
+            BrowserTabAction.CLoseLastTab(Driver);
         }
 
         [OneTimeTearDown]

@@ -7,7 +7,7 @@ using System.Threading;
 
 namespace YandexTraineeProject
 {
-    class YandexMusicTest : TestBase
+    public class YandexMusicTest : TestBase
     {
         private MainPage _mainPage;
         private LoginPage _loginPage;
@@ -46,13 +46,9 @@ namespace YandexTraineeProject
             _mainPage.ClickNavigationBarButton(MainPage.MusicButton);
             Driver.SwitchTo().Window(Driver.WindowHandles[1]);
             _yandexMusicPage.ClosePopUpMenu();
-            Thread.Sleep(1000);
             _yandexMusicPage.ClickSearchLine();
-            Thread.Sleep(1000);
             _yandexMusicPage.GetInputToSearchLine(_testData.MusicInputMetal);
-            Thread.Sleep(1000);
             _yandexMusicPage.ChooseFirstLineDropDownLine();
-            Thread.Sleep(2000);
             var artistName = _yandexMusicPage.GetArtistName();
             var popularAlbum = _yandexMusicPage.GetListOfPopularAlbums();
 
@@ -60,7 +56,6 @@ namespace YandexTraineeProject
             {
                 Assert.AreEqual("Metallica", artistName);
                 Assert.IsTrue(popularAlbum);
-
             });
 
         }
@@ -73,34 +68,18 @@ namespace YandexTraineeProject
             _loginPage.ClickLoginButton();
             _loginPage.PasswordInput(_testData.ValidPassword);
             _loginPage.ClickLoginButton();
-            Thread.Sleep(1000);
             Driver.Close();
             Driver.SwitchTo().Window(Driver.WindowHandles[0]);
             _mainPage.ClickNavigationBarButton(MainPage.MusicButton);
             Driver.SwitchTo().Window(Driver.WindowHandles[1]);
             _yandexMusicPage.ClosePopUpMenu();
-            Thread.Sleep(1000);
             _yandexMusicPage.ClickSearchLine();
-            Thread.Sleep(1000);
             _yandexMusicPage.GetInputToSearchLine(_testData.MusicInputBeyo);
-            Thread.Sleep(1000);
             _yandexMusicPage.ChooseFirstLineDropDownLine();
-            Thread.Sleep(2000);
-
-            _yandexMusicPage.JSexecutor();            
-           // _yandexMusicPage.MoveMouseToElement();
-            Thread.Sleep(3000);
-
-           // _yandexMusicPage.ClickToStartButtonFirstPopularSong();
-           // Thread.Sleep(1000);
-           // _yandexMusicPage.MakeScreenShot();
-            // _yandexMusicPage.ClickToStartButtonFirstPopularSong();
-           // _yandexMusicPage.JSexecutor();
-          //  Thread.Sleep(1000);
-          //  _yandexMusicPage.MakeScreenShot1();
+            _yandexMusicPage.ClickStopAndPlayFirstPopularSong();
+            _yandexMusicPage.MakeScreenShot();
+            _yandexMusicPage.ClickStopAndPlayFirstPopularSong();
+            _yandexMusicPage.MakeScreenShot();
         }
-
-
-
     }
 }

@@ -4,12 +4,13 @@ using NUnit.Framework;
 
 namespace YandexTraineeProject
 {
-    public class TestBase 
+    public class TestBase
     {
         protected IWebDriver Driver { get; }
 
         public TestBase()
         {
+            // var browser = TestContext.Parameters.Get("browser");
             var browser = "Chrome";
 
             if (!Enum.TryParse(browser, out BrowserType browserType))
