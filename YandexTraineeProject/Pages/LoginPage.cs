@@ -11,6 +11,7 @@ namespace YandexTraineeProject
         private string _passwordInputLine = "#passp-field-passwd";//css
         private string _submitLogin = "//button[@data-t='button:action']";
         private IWebDriver _driver;
+        WaitElement waitElement = new WaitElement();
 
         public LoginPage(IWebDriver webDriver)
         {
@@ -20,8 +21,7 @@ namespace YandexTraineeProject
         public void LoginInput(string login)
         {
             _driver.SwitchTo().Window(_driver.WindowHandles[1]);
-            new WebDriverWait(_driver, TimeSpan.FromSeconds(10))
-                .Until(ExpectedConditions.ElementToBeClickable(By.CssSelector(_loginInputLine))).SendKeys(login);
+            waitElement.IsElementClickable(_driver, By.CssSelector(_loginInputLine)).SendKeys(login);
         }
 
         public void ClickLoginButton()
@@ -32,14 +32,12 @@ namespace YandexTraineeProject
         public void PasswordInput(string password)
         {
             _driver.SwitchTo().Window(_driver.WindowHandles[1]);
-            new WebDriverWait(_driver, TimeSpan.FromSeconds(10))
-                 .Until(ExpectedConditions.ElementToBeClickable(By.CssSelector(_passwordInputLine))).SendKeys(password);
+            waitElement.IsElementClickable(_driver, By.CssSelector(_passwordInputLine)).SendKeys(password);
         }
 
         public string GetErrorMessage(string locator)
         {
-            return new WebDriverWait(_driver, TimeSpan.FromSeconds(10))
-                 .Until(ExpectedConditions.ElementExists(By.XPath(locator))).Text;
+            return waitElement.IsElementVisible(_driver, By.XPath(locator)).Text;
         }
     }
 }

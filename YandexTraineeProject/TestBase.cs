@@ -21,7 +21,7 @@ namespace YandexTraineeProject
             Driver = driverFactory.GetDriver(browserType);
         }
 
-        [TearDown]
+        [OneTimeTearDown]
         public void TearDown()
         {
             Driver.Quit();

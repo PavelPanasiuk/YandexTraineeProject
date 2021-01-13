@@ -34,10 +34,10 @@ namespace YandexTraineeProject
             _mainPage.ClickLanguageButton();
             _mainPage.ClickLanguageOptionsButton();
             _languagePage.ClickLanguageMenu();
-            _languagePage.SelectUkraineLanguage();
+            _languagePage.SelectLanguage(LanguageType.Belarussian);
             _languagePage.ClickSaveLanguageButton();
             var actualLanguage = _mainPage.GetLanguageName();
-            Assert.AreEqual("Ukr", actualLanguage);
+            Assert.AreEqual("Bel", actualLanguage);
         }
     }
 }

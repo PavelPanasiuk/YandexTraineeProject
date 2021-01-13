@@ -10,6 +10,7 @@ namespace YandexTraineeProject
     {
         private string _locationInput = "//input[@id='city__front-input']";
         private string _firstDropDownLine = "//li[@class][1]";
+        WaitElement waitElement = new WaitElement();
         private IWebDriver _driver;
 
         public LocationPage(IWebDriver webDriver)
@@ -22,8 +23,8 @@ namespace YandexTraineeProject
             _driver.FindElement(By.XPath(_locationInput)).Click();
             _driver.FindElement(By.XPath(_locationInput)).Clear();
             _driver.FindElement(By.XPath(_locationInput)).SendKeys(locationName);
-            new WebDriverWait(_driver, TimeSpan.FromSeconds(10))
-                .Until(ExpectedConditions.ElementIsVisible(By.XPath(_firstDropDownLine)));            
+            waitElement.IsElementVisible(_driver, By.XPath(_firstDropDownLine));
+            waitElement.IsElementClickable(_driver, By.XPath(_firstDropDownLine)).Click();              
         }
 
         public void SelectLocation()
