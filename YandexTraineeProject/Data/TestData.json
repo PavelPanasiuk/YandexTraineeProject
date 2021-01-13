@@ -8,7 +8,10 @@
     "locationLondon" : "Лондон",
     "locationParis" : "Париж",
     "notValidLoginOrPasswordMessage":"//div[@class='Textinput-Hint Textinput-Hint_state_error']",
-    "marketSearchText":"Note 8"
+    "marketSearchText":"Note 8",
+    "fridgeWidth":"50",
+    "musicInputMetal":"Metal",
+    "musicInputBeyo":"beyo"
 }
 
 

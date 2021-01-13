@@ -12,5 +12,8 @@ namespace YandexTraineeProject.Data
         public string LocationParis { get; set; }
         public string NotValidLoginOrPasswordMessage { get; set; }
         public string MarketSearchText { get; set; }
+        public string FridgeWidth { get; set; }
+       public string MusicInputMetal { get; set; }
+         public string MusicInputBeyo { get; set; }
     }
 }

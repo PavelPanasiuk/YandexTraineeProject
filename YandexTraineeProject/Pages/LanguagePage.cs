@@ -17,7 +17,6 @@ namespace YandexTraineeProject
         public void ClickLanguageMenu()
         {
             _driver.FindElement(By.XPath(_languageDropDownMenu)).Click();
-
         }
 
         public void SelectUkraineLanguage()
