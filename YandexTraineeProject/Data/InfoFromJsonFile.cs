@@ -11,7 +11,7 @@ namespace YandexTraineeProject.Data
         public InfoFromJsonFile()
         {
             _loginTestDataFileName = "TestData.json";
-            _pathToLoginData = Path.Combine(Directory.GetCurrentDirectory(), "Data", _loginTestDataFileName);
+            _pathToLoginData = Path.Combine(Directory.GetCurrentDirectory(), @"C:\Users\pavel\source\repos\YandexTraineeProject\YandexTraineeProject\Data", _loginTestDataFileName);
         }
 
         public TestData GetTestData()

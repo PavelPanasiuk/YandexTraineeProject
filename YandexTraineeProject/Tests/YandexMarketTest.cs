@@ -1,10 +1,6 @@
-﻿using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using NUnit.Allure.Core;
 using YandexTraineeProject.Data;
-using System.Threading;
-
 
 namespace YandexTraineeProject
 {
