@@ -81,5 +81,13 @@ namespace YandexTraineeProject
             _yandexMusicPage.ClickStopAndPlayFirstPopularSong();
             _yandexMusicPage.MakeScreenShot();
         }
+
+        [TearDown]
+        public void TearDown()
+        {
+            BrowserTabAction.CLoseLastTab(Driver);
+            BrowserTabAction.OpenNewTab(Driver);
+            BrowserTabAction.CLoseFirstTabTab(Driver);
+        }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using YandexTraineeProject.Data;
 using NUnit.Allure.Core;
+using System.Threading;
 
 namespace YandexTraineeProject
 {
@@ -32,7 +33,7 @@ namespace YandexTraineeProject
 
         [Test]
         public void OpenEmail_CheckUserName()
-        {            
+        {
             _mainPage.ClickEmailLoginButton();
             _loginPage.LoginInput(_testData.ValidLogin);
             _loginPage.ClickLoginButton();
@@ -76,6 +77,14 @@ namespace YandexTraineeProject
             _loginPage.ClickLoginButton();
             var errorText = _loginPage.GetErrorMessage(_testData.NotValidLoginOrPasswordMessage);
             Assert.IsNotNull(errorText);
+        }
+
+        [TearDown]
+        public void TearDown()
+        {
+            BrowserTabAction.CLoseLastTab(Driver);
+            BrowserTabAction.OpenNewTab(Driver);
+            BrowserTabAction.CLoseFirstTabTab(Driver);
         }
     }
 }

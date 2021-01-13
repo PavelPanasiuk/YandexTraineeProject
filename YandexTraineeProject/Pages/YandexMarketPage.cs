@@ -47,13 +47,14 @@ namespace YandexTraineeProject
             IJavaScriptExecutor js = (IJavaScriptExecutor)_driver;
             for (int i = 1; i <= 2; i++)
             {
-                var elem = _driver.FindElement(By.XPath($"//article[{i}]//div[@class='_1CXljk9rtd']"));
+                var elem = _driver.FindElement(By.XPath($"//article[{i}]//div[@tabindex][2]"));
                 js.ExecuteScript("arguments[0].click();", elem);
             }
         }
 
         public void ClickCompariButton()
         {
+            waitElement.IsElementExist(_driver, By.XPath(_compariButtonLocator));
             waitElement.IsElementClickable(_driver, By.XPath(_compariButtonLocator)).Click();
         }
 

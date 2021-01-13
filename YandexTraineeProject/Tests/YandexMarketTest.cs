@@ -76,11 +76,20 @@ namespace YandexTraineeProject
             _mainPage.ClickNavigationBarButton(MainPage.MarketButton);
             Driver.SwitchTo().Window(Driver.WindowHandles[1]);
             _yandexMarketPage.ClickHouseholAppliancesCategory();
+            _yandexMarketPage.ClosePopUpMenu();
             _yandexMarketPage.ClickFridgeButton();
             _yandexMarketPage.ClickFridgeWidthLine();
             _yandexMarketPage.IputFridgeWidth(_testData.FridgeWidth);
             var tagMessage = _yandexMarketPage.GetTagMessage();
             Assert.IsTrue(tagMessage.Contains(_testData.FridgeWidth));
+        }
+
+        [TearDown]
+        public void TearDown()
+        {
+            BrowserTabAction.CLoseLastTab(Driver);
+            BrowserTabAction.OpenNewTab(Driver);
+            BrowserTabAction.CLoseFirstTabTab(Driver);
         }
 
     }
