@@ -48,6 +48,7 @@ namespace YandexTraineeProject
         [Test]
         public void DeleteComparisonProducts()
         {
+            Driver.Manage().Cookies.DeleteAllCookies();
             _mainPage.ClickNavigationBarButton(MainPage.MarketButton);
             BrowserTabAction.SwitchToLastTab(Driver);
             _yandexMarketPage.ClickSearchLine();

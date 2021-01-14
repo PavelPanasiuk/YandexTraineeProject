@@ -70,7 +70,12 @@ namespace YandexTraineeProject
 
         public void ClickElectronikCategory()
         {
-            waitElement.IsElementClickable(_driver, By.XPath("//span[text()='Понятно']")).Click();
+            if (waitElement.IsElementVisible(_driver, By.XPath("//span[text()='Понятно']")) != null)
+            {
+                waitElement.IsElementClickable(_driver, By.XPath("//span[text()='Понятно']")).Click();
+                waitElement.IsElementVisible(_driver, By.XPath(_electronikCategoryButtonLocator));
+                waitElement.IsElementClickable(_driver, By.XPath(_electronikCategoryButtonLocator)).Click();
+            }
             waitElement.IsElementVisible(_driver, By.XPath(_electronikCategoryButtonLocator));
             waitElement.IsElementClickable(_driver, By.XPath(_electronikCategoryButtonLocator)).Click();
         }
@@ -113,6 +118,7 @@ namespace YandexTraineeProject
 
         public void ClickFridgeButton()
         {
+            waitElement.IsElementVisible(_driver, By.XPath(_fridgeButtonLocator));
             waitElement.IsElementClickable(_driver, By.XPath(_fridgeButtonLocator)).Click();
         }
 

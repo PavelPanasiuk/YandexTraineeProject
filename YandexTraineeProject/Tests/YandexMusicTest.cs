@@ -29,12 +29,14 @@ namespace YandexTraineeProject
             Driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(20);
             Driver.Manage().Window.Maximize();
             Driver.Navigate().GoToUrl(_testData.YandexUrl);
+            Driver.Manage().Cookies.DeleteAllCookies();
         }
 
         [Test]
         public void CheckArtistName()
         {
             _mainPage.ClickEmailLoginButton();
+            Driver.Manage().Cookies.DeleteAllCookies();
             _loginPage.LoginInput(_testData.ValidLogin);
             _loginPage.ClickLoginButton();
             _loginPage.PasswordInput(_testData.ValidPassword);
@@ -49,7 +51,7 @@ namespace YandexTraineeProject
             _yandexMusicPage.ChooseFirstLineDropDownLine();
             var artistName = _yandexMusicPage.GetArtistName();
             var popularAlbum = _yandexMusicPage.GetListOfPopularAlbums();
-
+           
             Assert.Multiple(() =>
             {
                 Assert.AreEqual("Metallica", artistName);
@@ -62,6 +64,7 @@ namespace YandexTraineeProject
         public void StartPlayingMusic()
         {
             _mainPage.ClickEmailLoginButton();
+            Driver.Manage().Cookies.DeleteAllCookies();
             _loginPage.LoginInput(_testData.ValidLogin);
             _loginPage.ClickLoginButton();
             _loginPage.PasswordInput(_testData.ValidPassword);
@@ -78,14 +81,15 @@ namespace YandexTraineeProject
             _yandexMusicPage.MakeScreenShot();
             _yandexMusicPage.ClickStopAndPlayFirstPopularSong();
             _yandexMusicPage.MakeScreenShot();
+
         }
 
-        //[TearDown]
-        //public void TearDown()
-        //{
-        //    BrowserTabAction.CLoseLastTab(Driver);
-        //    BrowserTabAction.OpenNewTab(Driver);
-        //    BrowserTabAction.CLoseFirstTab(Driver);
-        //}
+        [TearDown]
+        public void TearDown()
+        {
+            BrowserTabAction.CLoseLastTab(Driver);
+            BrowserTabAction.OpenNewTab(Driver);
+            BrowserTabAction.CLoseFirstTab(Driver);
+        }
     }
 }

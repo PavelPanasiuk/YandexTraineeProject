@@ -20,16 +20,20 @@ namespace YandexTraineeProject
 
         public string GetUserName()
         {
-            _driver.SwitchTo().Window(_driver.WindowHandles[1]);
+            BrowserTabAction.SwitchToLastTab(_driver);
             waitElement.IsElementVisible(_driver, By.XPath(_userName));
             return _driver.FindElement(By.XPath(_userName)).Text;
         }
 
-        public void LogOut()
+        public void ClickLogOut()
         {
-            _driver.SwitchTo().Window(_driver.WindowHandles[1]);
-            waitElement.IsElementClickable(_driver, By.XPath(_accountOptionsButton)).Click();
+            BrowserTabAction.SwitchToLastTab(_driver);           
             waitElement.IsElementClickable(_driver, By.XPath(_exitButton)).Click();
+        }
+
+        public void ClickAccountOptionsButton()
+        {
+            waitElement.IsElementClickable(_driver, By.XPath(_accountOptionsButton)).Click();
         }
 
         public void GoToMainPage()

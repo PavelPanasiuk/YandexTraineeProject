@@ -40,12 +40,6 @@ namespace YandexTraineeProject
             var currentUrl = Driver.SwitchTo().Window(Driver.WindowHandles[1]).Url;
             Assert.IsTrue(currentUrl.Contains(expectedresult));
             BrowserTabAction.CLoseLastTab(Driver);
-        }
-
-        [OneTimeTearDown]
-        public void OneTimeTearDown()
-        {
-            Driver.Quit();
-        }
+        }        
     }
 }

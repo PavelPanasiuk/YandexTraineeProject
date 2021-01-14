@@ -12,7 +12,7 @@ namespace YandexTraineeProject
         {
             try
             {
-                return new WebDriverWait(driver, TimeSpan.FromSeconds(20))
+                return new WebDriverWait(driver, TimeSpan.FromSeconds(5))
                  .Until(ExpectedConditions.ElementToBeClickable(locator));
             }
             catch (TimeoutException ex)
@@ -25,7 +25,7 @@ namespace YandexTraineeProject
         {
             try
             {
-                return new WebDriverWait(driver, TimeSpan.FromSeconds(20))
+                return new WebDriverWait(driver, TimeSpan.FromSeconds(5))
                  .Until(ExpectedConditions.ElementIsVisible(locator));
             }
             catch (TimeoutException ex)
@@ -38,7 +38,7 @@ namespace YandexTraineeProject
         {
             try
             {
-                return new WebDriverWait(driver, TimeSpan.FromSeconds(20))
+                return new WebDriverWait(driver, TimeSpan.FromSeconds(5))
                  .Until(ExpectedConditions.ElementExists(locator));
             }
             catch (TimeoutException ex)
