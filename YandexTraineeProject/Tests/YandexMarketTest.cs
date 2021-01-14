@@ -1,6 +1,8 @@
 ﻿using NUnit.Framework;
 using NUnit.Allure.Core;
 using YandexTraineeProject.Data;
+using System;
+using System.Threading;
 
 namespace YandexTraineeProject
 {
@@ -24,6 +26,7 @@ namespace YandexTraineeProject
         [SetUp]
         public void SetUp()
         {
+            Driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(20);
             Driver.Manage().Window.Maximize();
             Driver.Navigate().GoToUrl(_testData.YandexUrl);
         }
@@ -32,9 +35,9 @@ namespace YandexTraineeProject
         public void ComparisonTwoProducts()
         {
             _mainPage.ClickNavigationBarButton(MainPage.MarketButton);
-            Driver.SwitchTo().Window(Driver.WindowHandles[1]);
+            BrowserTabAction.SwitchToLastTab(Driver);
             _yandexMarketPage.ClickSearchLine();
-            _yandexMarketPage.InputSearchText(_testData.MarketSearchText);
+            _yandexMarketPage.InputSearchLine(_testData.MarketSearchText);
             _yandexMarketPage.ClickSearchButton();
             _yandexMarketPage.AddProductsForComparison();
             _yandexMarketPage.ClickCompariButton();
@@ -46,13 +49,13 @@ namespace YandexTraineeProject
         public void DeleteComparisonProducts()
         {
             _mainPage.ClickNavigationBarButton(MainPage.MarketButton);
-            Driver.SwitchTo().Window(Driver.WindowHandles[1]);
+            BrowserTabAction.SwitchToLastTab(Driver);
             _yandexMarketPage.ClickSearchLine();
-            _yandexMarketPage.InputSearchText(_testData.MarketSearchText);
+            _yandexMarketPage.InputSearchLine(_testData.MarketSearchText);
             _yandexMarketPage.ClickSearchButton();
             _yandexMarketPage.AddProductsForComparison();
             _yandexMarketPage.ClickCompariButton();
-            _yandexMarketPage.ClickDeleteAllProductsFromComparisonListButton();
+            _yandexMarketPage.DeleteProductsFromComparisonList();
             var result = _yandexMarketPage.GetListOfProductsForComparison();
             Assert.IsNotNull(result);
         }
@@ -61,7 +64,7 @@ namespace YandexTraineeProject
         public void SortingTabletsByPrise()
         {
             _mainPage.ClickNavigationBarButton(MainPage.MarketButton);
-            Driver.SwitchTo().Window(Driver.WindowHandles[1]);
+            BrowserTabAction.SwitchToLastTab(Driver);
             _yandexMarketPage.ClickElectronikCategory();
             _yandexMarketPage.ClickTabletButton();
             _yandexMarketPage.ClickSortingButtonByPrice();
@@ -74,7 +77,7 @@ namespace YandexTraineeProject
         public void SortingFridgeByTag()
         {
             _mainPage.ClickNavigationBarButton(MainPage.MarketButton);
-            Driver.SwitchTo().Window(Driver.WindowHandles[1]);
+            BrowserTabAction.SwitchToLastTab(Driver);
             _yandexMarketPage.ClickHouseholAppliancesCategory();
             _yandexMarketPage.ClosePopUpMenu();
             _yandexMarketPage.ClickFridgeButton();
@@ -85,11 +88,12 @@ namespace YandexTraineeProject
         }
 
         [TearDown]
-        public void TearDown()
+        public new void TearDown()
         {
+            Thread.Sleep(2000);
             BrowserTabAction.CLoseLastTab(Driver);
             BrowserTabAction.OpenNewTab(Driver);
-            BrowserTabAction.CLoseFirstTabTab(Driver);
+            BrowserTabAction.CLoseFirstTab(Driver);
         }
 
     }

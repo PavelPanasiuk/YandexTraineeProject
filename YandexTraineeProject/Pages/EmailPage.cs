@@ -7,7 +7,7 @@ namespace YandexTraineeProject
 {
     public class EmailPage
     {
-        private string _userName = "//span[text()='AutotestLogin']";
+        private string _userName = "//span[@class='user-account__name'][1]";
         private string _accountOptionsButton = "//span[@class='user-account__name'][1]";
         private string _exitButton = "//span[contains(text(),'Выйти из сервисов Яндекса')]";
         private IWebDriver _driver;
@@ -34,7 +34,8 @@ namespace YandexTraineeProject
 
         public void GoToMainPage()
         {
-
+            waitElement.IsElementVisible(_driver, By.XPath("//div[@class='yandex-header__logo']/*[1]"));
+            waitElement.IsElementClickable(_driver, By.XPath("//div[@class='yandex-header__logo']/*[1]")).Click();
         }
     }
 }

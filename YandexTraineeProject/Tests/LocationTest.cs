@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using YandexTraineeProject.Data;
 using NUnit.Allure.Core;
+using System;
 
 namespace YandexTraineeProject
 {
@@ -19,11 +20,12 @@ namespace YandexTraineeProject
             _mainPage = new MainPage(Driver);
             _jsonFile = new InfoFromJsonFile();
             _testData = _jsonFile.GetTestData();
-        }        
+        }
 
         [SetUp]
         public void Setup()
         {
+            Driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(20);
             _testData = _jsonFile.GetTestData();
             Driver.Navigate().GoToUrl(_testData.YandexUrl);
         }
@@ -34,20 +36,14 @@ namespace YandexTraineeProject
             _mainPage.ClickLocationButton();
             _locationPage.ChangeLocation(_testData.LocationLondon);
             _locationPage.SelectLocation();
-            var elseButtonLondon = _mainPage.GetListOfElseMenuElements();          
+            var elseButtonLondon = _mainPage.GetListOfElseMenuElements();
 
             _mainPage.ClickLocationButton();
             _locationPage.ChangeLocation(_testData.LocationParis);
             _locationPage.SelectLocation();
-            var elseButtonParis = _mainPage.GetListOfElseMenuElements();         
+            var elseButtonParis = _mainPage.GetListOfElseMenuElements();
 
             Assert.AreEqual(elseButtonLondon, elseButtonParis);
-        }
-
-        [TearDown]
-        public void TearDown()
-        {
-            Driver.Quit();
         }
     }
 }

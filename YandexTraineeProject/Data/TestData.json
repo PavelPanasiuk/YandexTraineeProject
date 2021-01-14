@@ -1,8 +1,8 @@
 ﻿{
 
     "yandexUrl" : "https://yandex.by/",
-    "validLogin" : "AutotestLogin",
-    "validPassword" : "AutotestPassword",        
+    "validLogin" : "paveltesting",
+    "validPassword" : "paveltesting123",        
     "notValidPassword" : "NoAutotestUser123",
     "notValidLogin" : "NoAutotestUser",
     "locationLondon" : "Лондон",

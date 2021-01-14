@@ -21,7 +21,7 @@ namespace YandexTraineeProject
 
         [OneTimeSetUp]
         public void SetUp()
-        {
+        {            
             _testData = _jsonFile.GetTestData();
             Driver.Manage().Window.Maximize();
             Driver.Navigate().GoToUrl(_testData.YandexUrl);

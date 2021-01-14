@@ -2,6 +2,7 @@
 using YandexTraineeProject.Data;
 using NUnit.Allure.Core;
 using System.Threading;
+using System;
 
 namespace YandexTraineeProject
 {
@@ -27,6 +28,7 @@ namespace YandexTraineeProject
         [SetUp]
         public void Setup()
         {
+            Driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(20);
             Driver.Manage().Window.Maximize();
             Driver.Navigate().GoToUrl(_testData.YandexUrl);
         }
@@ -84,7 +86,7 @@ namespace YandexTraineeProject
         {
             BrowserTabAction.CLoseLastTab(Driver);
             BrowserTabAction.OpenNewTab(Driver);
-            BrowserTabAction.CLoseFirstTabTab(Driver);
+            BrowserTabAction.CLoseFirstTab(Driver);
         }
     }
 }

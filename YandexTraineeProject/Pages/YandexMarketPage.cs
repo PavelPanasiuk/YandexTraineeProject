@@ -32,7 +32,7 @@ namespace YandexTraineeProject
             waitElement.IsElementClickable(_driver, By.XPath(_searchLineLocator)).Click();
         }
 
-        public void InputSearchText(string input)
+        public void InputSearchLine(string input)
         {
             waitElement.IsElementClickable(_driver, By.XPath(_searchLineLocator)).SendKeys(input);
         }
@@ -47,14 +47,14 @@ namespace YandexTraineeProject
             IJavaScriptExecutor js = (IJavaScriptExecutor)_driver;
             for (int i = 1; i <= 2; i++)
             {
-                var elem = _driver.FindElement(By.XPath($"//article[{i}]//div[@tabindex][2]"));
+                var elem = waitElement.IsElementExist(_driver, By.XPath($"//article[{i}]//div[@tabindex][2]"));
                 js.ExecuteScript("arguments[0].click();", elem);
             }
         }
 
         public void ClickCompariButton()
         {
-            waitElement.IsElementExist(_driver, By.XPath(_compariButtonLocator));
+            waitElement.IsElementVisible(_driver, By.XPath(_compariButtonLocator));
             waitElement.IsElementClickable(_driver, By.XPath(_compariButtonLocator)).Click();
         }
 
@@ -63,7 +63,7 @@ namespace YandexTraineeProject
             return _driver.FindElements(By.CssSelector(".e910RKmlsj")).ToList();
         }
 
-        public void ClickDeleteAllProductsFromComparisonListButton()
+        public void DeleteProductsFromComparisonList()
         {
             waitElement.IsElementClickable(_driver, By.XPath(_deleteListButtonLocator)).Click();
         }
@@ -71,6 +71,7 @@ namespace YandexTraineeProject
         public void ClickElectronikCategory()
         {
             waitElement.IsElementClickable(_driver, By.XPath("//span[text()='Понятно']")).Click();
+            waitElement.IsElementVisible(_driver, By.XPath(_electronikCategoryButtonLocator));
             waitElement.IsElementClickable(_driver, By.XPath(_electronikCategoryButtonLocator)).Click();
         }
 

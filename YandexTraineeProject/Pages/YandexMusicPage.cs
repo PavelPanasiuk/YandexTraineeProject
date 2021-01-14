@@ -37,12 +37,13 @@ namespace YandexTraineeProject
         public void ChooseFirstLineDropDownLine()
         {
             Actions actions = new Actions(_driver);
+            waitElement.IsElementExist(_driver, By.XPath("//div[@data-card='search_suggest'][1]"));
             actions.SendKeys(Keys.ArrowDown).SendKeys(Keys.ArrowDown).SendKeys(Keys.Enter).Build().Perform();
         }
 
         public string GetArtistName()
         {
-            return waitElement.IsElementExist(_driver, By.XPath("//h1")).Text;
+            return waitElement.IsElementExist(_driver, By.XPath("//h1[@class]")).Text;
         }
 
         public bool GetListOfPopularAlbums()
@@ -54,7 +55,8 @@ namespace YandexTraineeProject
             for (int i = 0; i < elems.Count; i++)
             {
                 int x = i;
-                var albumName = _driver.FindElement(By.XPath($"//div[@class='album album_selectable'][{++x}]//div[@title][2]")).GetAttribute("title");
+                var albumName = waitElement.IsElementVisible(_driver, By.XPath($"//div[@class='album album_selectable'][{++x}]//div[@title][2]"))
+                    .GetAttribute("title");                
                 if (albumName != "Metallica")
                 {
                     result = false;
@@ -68,7 +70,7 @@ namespace YandexTraineeProject
 
         public void ClickStopAndPlayFirstPopularSong()
         {
-            var elem = _driver.FindElement(By.XPath("//span[text()='Слушать']"));
+            var elem = waitElement.IsElementVisible(_driver, By.XPath("//span[text()='Слушать']"));
             IJavaScriptExecutor js = (IJavaScriptExecutor)_driver;
             js.ExecuteScript("arguments[0].click();", elem);
         }

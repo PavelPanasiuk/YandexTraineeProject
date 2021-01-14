@@ -29,6 +29,7 @@ namespace YandexTraineeProject
         [SetUp]
         public void SetUp()
         {
+            Driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(20);
             Driver.Manage().Window.Maximize();
             Driver.Navigate().GoToUrl(_testData.YandexUrl);
         }
@@ -41,10 +42,10 @@ namespace YandexTraineeProject
             _loginPage.ClickLoginButton();
             _loginPage.PasswordInput(_testData.ValidPassword);
             _loginPage.ClickLoginButton();
-            Driver.Close();
-            Driver.SwitchTo().Window(Driver.WindowHandles[0]);
+            _emailPage.GoToMainPage();
+            BrowserTabAction.CLoseFirstTab(Driver);
             _mainPage.ClickNavigationBarButton(MainPage.MusicButton);
-            Driver.SwitchTo().Window(Driver.WindowHandles[1]);
+            BrowserTabAction.SwitchToLastTab(Driver);
             _yandexMusicPage.ClosePopUpMenu();
             _yandexMusicPage.ClickSearchLine();
             _yandexMusicPage.GetInputToSearchLine(_testData.MusicInputMetal);
@@ -68,10 +69,10 @@ namespace YandexTraineeProject
             _loginPage.ClickLoginButton();
             _loginPage.PasswordInput(_testData.ValidPassword);
             _loginPage.ClickLoginButton();
-            Driver.Close();
-            Driver.SwitchTo().Window(Driver.WindowHandles[0]);
+            _emailPage.GoToMainPage();
+            BrowserTabAction.CLoseFirstTab(Driver);
             _mainPage.ClickNavigationBarButton(MainPage.MusicButton);
-            Driver.SwitchTo().Window(Driver.WindowHandles[1]);
+            BrowserTabAction.SwitchToLastTab(Driver);
             _yandexMusicPage.ClosePopUpMenu();
             _yandexMusicPage.ClickSearchLine();
             _yandexMusicPage.GetInputToSearchLine(_testData.MusicInputBeyo);
@@ -82,12 +83,12 @@ namespace YandexTraineeProject
             _yandexMusicPage.MakeScreenShot();
         }
 
-        [TearDown]
-        public void TearDown()
-        {
-            BrowserTabAction.CLoseLastTab(Driver);
-            BrowserTabAction.OpenNewTab(Driver);
-            BrowserTabAction.CLoseFirstTabTab(Driver);
-        }
+        //[TearDown]
+        //public void TearDown()
+        //{
+        //    BrowserTabAction.CLoseLastTab(Driver);
+        //    BrowserTabAction.OpenNewTab(Driver);
+        //    BrowserTabAction.CLoseFirstTab(Driver);
+        //}
     }
 }

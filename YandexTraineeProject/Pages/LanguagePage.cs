@@ -29,8 +29,7 @@ namespace YandexTraineeProject
             {
                 { LanguageType.Russian, "ru" },
                 { LanguageType.Ukranian, "uk" },
-                { LanguageType.English, "en" },
-                { LanguageType.Belarussian, "be"}
+                { LanguageType.English, "en" }               
             };
 
             var select = _driver.FindElement(By.XPath("//select[@name='intl']"));

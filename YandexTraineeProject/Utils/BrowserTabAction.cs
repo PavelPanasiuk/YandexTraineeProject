@@ -19,7 +19,7 @@ namespace YandexTraineeProject
             }
         }
 
-        public static void CLoseFirstTabTab(IWebDriver driver)
+        public static void CLoseFirstTab(IWebDriver driver)
         {
             var tabs = driver.WindowHandles;
             if (tabs.Count > 1)
