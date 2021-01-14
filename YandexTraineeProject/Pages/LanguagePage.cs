@@ -29,7 +29,8 @@ namespace YandexTraineeProject
             {
                 { LanguageType.Russian, "ru" },
                 { LanguageType.Ukranian, "uk" },
-                { LanguageType.English, "en" }               
+                { LanguageType.English, "en" },
+                { LanguageType.Belarussian,"be"}
             };
 
             var select = _driver.FindElement(By.XPath("//select[@name='intl']"));
@@ -38,13 +39,12 @@ namespace YandexTraineeProject
             var actions = new Actions(_driver);
             var indexOfRequiredLanguageValue = languageOptions.IndexOf(languageOptions.First(o => o.GetAttribute("value") == map[language]));
 
-            for (int i = 0; i <= indexOfRequiredLanguageValue; i++)
+            for (int i = 0; i < indexOfRequiredLanguageValue; i++)
             {
                 actions.SendKeys(Keys.ArrowDown);
             }
             actions.SendKeys(Keys.Enter).Build().Perform();
         }
-
 
         public void ClickSaveLanguageButton()
         {

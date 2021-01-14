@@ -1,10 +1,8 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
-using System.Threading;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System;
+using System.Threading;
 
 namespace YandexTraineeProject
 {
@@ -43,6 +41,7 @@ namespace YandexTraineeProject
 
         public string GetArtistName()
         {
+            Thread.Sleep(500);//Todo не понимаю на что ориентироваться что бы все прогрузилось
             return waitElement.IsElementExist(_driver, By.XPath("//h1[@class]")).Text;
         }
 
@@ -55,8 +54,8 @@ namespace YandexTraineeProject
             for (int i = 0; i < elems.Count; i++)
             {
                 int x = i;
-                var albumName = waitElement.IsElementVisible(_driver, By.XPath($"//div[@class='album album_selectable'][{++x}]//div[@title][2]"))
-                    .GetAttribute("title");                
+                var albumName = waitElement.IsElementExist(_driver, By.XPath($"//div[@class='album album_selectable'][{++x}]//div[@title][2]"))
+                    .GetAttribute("title");
                 if (albumName != "Metallica")
                 {
                     result = false;

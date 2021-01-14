@@ -26,8 +26,7 @@ namespace YandexTraineeProject
             Driver.Manage().Window.Maximize();
             Driver.Navigate().GoToUrl(_testData.YandexUrl);
         }
-
-        [Test, Category("NavigationBar")]
+        
         [TestCase(MainPage.ImageButton, "images")]
         [TestCase(MainPage.MapButton, "maps")]
         [TestCase(MainPage.MarketButton, "market")]

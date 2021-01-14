@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using YandexTraineeProject.Data;
 using NUnit.Framework;
-using System.Threading;
 
 namespace YandexTraineeProject
 {

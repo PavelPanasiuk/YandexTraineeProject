@@ -25,8 +25,8 @@ namespace YandexTraineeProject
         [SetUp]
         public void Setup()
         {
-            Driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(20);
             _testData = _jsonFile.GetTestData();
+            Driver.Manage().Window.Maximize();
             Driver.Navigate().GoToUrl(_testData.YandexUrl);
         }
 
@@ -34,12 +34,18 @@ namespace YandexTraineeProject
         public void CompareElseButtonElements()
         {
             _mainPage.ClickLocationButton();
-            _locationPage.ChangeLocation(_testData.LocationLondon);
+            _locationPage.ClickSearchLine();
+            _locationPage.ClearSearchLine();
+            _locationPage.InputLocationName(_testData.LocationLondon);
+            _locationPage.ClickSearchLine();
             _locationPage.SelectLocation();
             var elseButtonLondon = _mainPage.GetListOfElseMenuElements();
 
             _mainPage.ClickLocationButton();
-            _locationPage.ChangeLocation(_testData.LocationParis);
+            _locationPage.ClickSearchLine();
+            _locationPage.ClearSearchLine();
+            _locationPage.InputLocationName(_testData.LocationParis);
+            _locationPage.ClickSearchLine();
             _locationPage.SelectLocation();
             var elseButtonParis = _mainPage.GetListOfElseMenuElements();
 

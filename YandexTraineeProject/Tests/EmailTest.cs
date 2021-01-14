@@ -1,14 +1,13 @@
 ﻿using NUnit.Framework;
 using YandexTraineeProject.Data;
 using NUnit.Allure.Core;
-using System.Threading;
 using System;
 
 namespace YandexTraineeProject
 {
     [AllureNUnit]
     [TestFixture]
-    public class EmailTest : TestBase  //ToDo Открывать новый браузер перед каждым тестом та как запоминает пользователя
+    public class EmailTest : TestBase 
     {
         private MainPage _mainPage;
         private EmailPage _emailPage;

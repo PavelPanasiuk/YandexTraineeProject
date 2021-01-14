@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Support.UI;
 
 namespace YandexTraineeProject
 {
@@ -21,7 +19,6 @@ namespace YandexTraineeProject
         public const string TranslateButton = "//a[@data-id='translate']";
         public const string MusicButton = "//a[@data-id='music']";
         private IWebDriver _driver;
-
         WaitElement waitElement = new WaitElement();
 
         public MainPage(IWebDriver webDriver)
