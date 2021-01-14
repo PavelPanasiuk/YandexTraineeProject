@@ -21,7 +21,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="Data\TestData.json" />
+    <Content Update="C:\Users\pavel\.nuget\packages\allure.commons\3.5.0.4\contentFiles\any\netstandard2.0\allureConfig.Template.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Data\TestData.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update=".runsettings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

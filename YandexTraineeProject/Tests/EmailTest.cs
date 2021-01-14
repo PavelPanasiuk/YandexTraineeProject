@@ -40,17 +40,20 @@ namespace YandexTraineeProject
             _loginPage.PasswordInput(_testData.ValidPassword);
             _loginPage.ClickLoginButton();
             var userName = _emailPage.GetUserName();
+            BrowserTabAction.SwitchToFirstTab(Driver);
             Driver.Manage().Cookies.DeleteAllCookies();
+            Thread.Sleep(1000);
             Assert.AreEqual(_testData.ValidLogin, userName);
         }
 
-        [Test]       
+        [Test]
         public void QuitFromEmailAccount()
         {
-            BrowserTabAction.CLoseLastTab(Driver);
-            Driver.Manage().Cookies.DeleteAllCookies();
             _mainPage.ClickEmailLoginButton();
-
+            BrowserTabAction.SwitchToLastTab(Driver);
+            Driver.Manage().Cookies.DeleteAllCookies();
+            Thread.Sleep(3000);
+            Driver.Navigate().Refresh();
             _loginPage.LoginInput(_testData.ValidLogin);
             _loginPage.ClickLoginButton();
             _loginPage.PasswordInput(_testData.ValidPassword);
@@ -66,8 +69,11 @@ namespace YandexTraineeProject
         [TearDown]
         public void TearDown()
         {
-            BrowserTabAction.SwitchToFirstTab(Driver);
+            //BrowserTabAction.SwitchToFirstTab(Driver);
             BrowserTabAction.CLoseLastTab(Driver);
+            // BrowserTabAction.OpenNewTab(Driver);
+            // BrowserTabAction.CLoseFirstTab(Driver);
+            Driver.Manage().Cookies.DeleteAllCookies();
         }
     }
 
@@ -97,7 +103,7 @@ namespace YandexTraineeProject
 
         [Test]
         public void UseNotValidLogin()
-        {            
+        {
             _mainPage.ClickEmailLoginButton();
             _loginPage.LoginInput(_testData.NotValidLogin);
             _loginPage.ClickLoginButton();
@@ -107,7 +113,7 @@ namespace YandexTraineeProject
 
         [Test]
         public void UseNotValidPassword()
-        {           
+        {
             _mainPage.ClickEmailLoginButton();
             _loginPage.LoginInput(_testData.ValidLogin);
             _loginPage.ClickLoginButton();

@@ -20,7 +20,7 @@ namespace YandexTraineeProject
 
         public void LoginInput(string login)
         {
-            _driver.SwitchTo().Window(_driver.WindowHandles[1]);
+            BrowserTabAction.SwitchToLastTab(_driver);           
             waitElement.IsElementClickable(_driver, By.CssSelector(_loginInputLine)).SendKeys(login);
         }
 
@@ -31,7 +31,7 @@ namespace YandexTraineeProject
 
         public void PasswordInput(string password)
         {
-            _driver.SwitchTo().Window(_driver.WindowHandles[1]);
+            BrowserTabAction.SwitchToLastTab(_driver);
             waitElement.IsElementClickable(_driver, By.CssSelector(_passwordInputLine)).SendKeys(password);
         }
 
