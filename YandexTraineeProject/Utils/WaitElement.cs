@@ -46,9 +46,6 @@ namespace YandexTraineeProject
                 throw new TimeoutException($"Timed out waiting\n", ex);
             }
         }
-
     }
-
-
 }
 

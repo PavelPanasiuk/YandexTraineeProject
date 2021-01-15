@@ -7,14 +7,14 @@ namespace YandexTraineeProject
 {
     [TestFixture]
     [AllureNUnit]
-    public class Location : TestBase
+    public class LocationTest : TestBase
     {
         private LocationPage _locationPage;
         private MainPage _mainPage;
         private InfoFromJsonFile _jsonFile;
         private TestData _testData;
 
-        public Location()
+        public LocationTest()
         {
             _locationPage = new LocationPage(Driver);
             _mainPage = new MainPage(Driver);
