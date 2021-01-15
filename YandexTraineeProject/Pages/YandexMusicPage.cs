@@ -33,8 +33,15 @@ namespace YandexTraineeProject
 
         public void ClosePopUpMenu()
         {
-            waitElement.IsElementClickable(_driver, By.XPath(_popUpMenuCLocator))
-                .Click();
+            try
+            {
+                waitElement.IsElementClickable(_driver, By.XPath(_popUpMenuCLocator))
+                    .Click();
+            }
+            catch(Exception ex)
+            {
+                return;
+            }
         }
 
         public void ChooseFirstLineInDropDown()
@@ -47,7 +54,7 @@ namespace YandexTraineeProject
         public string GetArtistName()
         {
             Thread.Sleep(500);
-            return waitElement.IsElementExist(_driver, By.XPath(_artistNameLocator)).Text;
+            return waitElement.IsElementVisible(_driver, By.XPath(_artistNameLocator)).Text;
         }
 
         public bool GetListOfPopularAlbums()
@@ -84,6 +91,12 @@ namespace YandexTraineeProject
             Random random = new Random();
             Screenshot ss = ((ITakesScreenshot)_driver).GetScreenshot();
             ss.SaveAsFile($"E:\\windowCondition{random.Next()}.jpeg");
+        }
+
+        public void RefreshTab()
+        {
+            IJavaScriptExecutor js = (IJavaScriptExecutor)_driver;
+            js.ExecuteScript("location.reload()");
         }
     }
 }

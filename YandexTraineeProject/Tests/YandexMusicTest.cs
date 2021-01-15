@@ -1,6 +1,6 @@
-﻿using System;
-using YandexTraineeProject.Data;
+﻿using YandexTraineeProject.Data;
 using NUnit.Framework;
+
 
 namespace YandexTraineeProject
 {
@@ -23,24 +23,22 @@ namespace YandexTraineeProject
             _testData = _jsonFile.GetTestData();
         }
 
-        [SetUp]
+        [OneTimeSetUp]
         public void SetUp()
         {
-           // Driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(20);
             Driver.Manage().Window.Maximize();
             Driver.Navigate().GoToUrl(_testData.YandexUrl);
-           // Driver.Manage().Cookies.DeleteAllCookies();
-        }
-
-        [Test]
-        public void CheckArtistName()
-        {
             _mainPage.ClickEmailLoginButton();
             _loginPage.LoginInput(_testData.ValidLogin);
             _loginPage.ClickLoginButton();
             _loginPage.PasswordInput(_testData.ValidPassword);
             _loginPage.ClickLoginButton();
             _emailPage.GoToMainPage();
+        }
+
+        [Test]
+        public void CheckArtistName()
+        {
             BrowserTabAction.CLoseFirstTab(Driver);
             _mainPage.ClickNavigationBarButton(MainPage.MusicButton);
             BrowserTabAction.SwitchToLastTab(Driver);
@@ -56,19 +54,11 @@ namespace YandexTraineeProject
                 Assert.AreEqual("Metallica", artistName);
                 Assert.IsTrue(popularAlbum);
             });
-
         }
 
         [Test]
         public void StartPlayingMusic()
         {
-            _mainPage.ClickEmailLoginButton();
-            _loginPage.LoginInput(_testData.ValidLogin);
-            _loginPage.ClickLoginButton();
-            _loginPage.PasswordInput(_testData.ValidPassword);
-            _loginPage.ClickLoginButton();
-            _emailPage.GoToMainPage();
-            BrowserTabAction.CLoseFirstTab(Driver);
             _mainPage.ClickNavigationBarButton(MainPage.MusicButton);
             BrowserTabAction.SwitchToLastTab(Driver);
             _yandexMusicPage.ClosePopUpMenu();
@@ -79,14 +69,11 @@ namespace YandexTraineeProject
             _yandexMusicPage.MakeScreenShot();
             _yandexMusicPage.ClickStopAndPlayFirstPopularSong();
             _yandexMusicPage.MakeScreenShot();
-
         }
 
         [TearDown]
         public void TearDown()
         {
-            BrowserTabAction.CLoseLastTab(Driver);
-            BrowserTabAction.OpenNewTab(Driver);
             BrowserTabAction.CLoseFirstTab(Driver);
         }
     }
