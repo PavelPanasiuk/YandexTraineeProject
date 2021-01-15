@@ -33,26 +33,24 @@ namespace YandexTraineeProject
 
         [Test]
         public void OpenEmail_CheckUserName()
-        {
-            _mainPage.ClickEmailLoginButton();
+        {           
+            _mainPage.ClickEmailLoginButton();          
             _loginPage.LoginInput(_testData.ValidLogin);
             _loginPage.ClickLoginButton();
             _loginPage.PasswordInput(_testData.ValidPassword);
             _loginPage.ClickLoginButton();
-            var userName = _emailPage.GetUserName();
-            BrowserTabAction.SwitchToFirstTab(Driver);
+            var userName = _emailPage.GetUserName();           
             Driver.Manage().Cookies.DeleteAllCookies();
-            Thread.Sleep(1000);
             Assert.AreEqual(_testData.ValidLogin, userName);
         }
 
         [Test]
         public void QuitFromEmailAccount()
         {
+            
             _mainPage.ClickEmailLoginButton();
             BrowserTabAction.SwitchToLastTab(Driver);
             Driver.Manage().Cookies.DeleteAllCookies();
-            Thread.Sleep(3000);
             Driver.Navigate().Refresh();
             _loginPage.LoginInput(_testData.ValidLogin);
             _loginPage.ClickLoginButton();
@@ -62,18 +60,13 @@ namespace YandexTraineeProject
             _emailPage.ClickAccountOptionsButton();
             var currentUrl = Driver.Url;
             _emailPage.ClickLogOut();
-            Driver.Manage().Cookies.DeleteAllCookies();
             Assert.AreNotEqual(emailPageUrl, currentUrl);
         }
 
         [TearDown]
         public void TearDown()
-        {
-            //BrowserTabAction.SwitchToFirstTab(Driver);
-            BrowserTabAction.CLoseLastTab(Driver);
-            // BrowserTabAction.OpenNewTab(Driver);
-            // BrowserTabAction.CLoseFirstTab(Driver);
-            Driver.Manage().Cookies.DeleteAllCookies();
+        {            
+            BrowserTabAction.CLoseLastTab(Driver);           
         }
     }
 

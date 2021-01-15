@@ -1,10 +1,7 @@
 ﻿using System;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Support.UI;
-using System.IO;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 
 namespace YandexTraineeProject
 {
@@ -19,6 +16,8 @@ namespace YandexTraineeProject
         private string _byPriceButtonLocator = "//button[text()='по цене']";
         private string _householAppliancesCategoryButtonLocator = "//div[text()='Бытовая техника']";
         private string _fridgeButtonLocator = "//span[text()='Холодильники'][1]";
+        private string _comparisonLine = ".e910RKmlsj";
+        private string _popUpMenuNearSerchLineLocator = "//span[text()='Понятно']";
         private IWebDriver _driver;
         WaitElement waitElement = new WaitElement();
 
@@ -60,7 +59,7 @@ namespace YandexTraineeProject
 
         public List<IWebElement> GetListOfProductsForComparison()
         {
-            return _driver.FindElements(By.CssSelector(".e910RKmlsj")).ToList();
+            return _driver.FindElements(By.CssSelector(_comparisonLine)).ToList();
         }
 
         public void DeleteProductsFromComparisonList()
@@ -70,14 +69,16 @@ namespace YandexTraineeProject
 
         public void ClickElectronikCategory()
         {
-            if (waitElement.IsElementVisible(_driver, By.XPath("//span[text()='Понятно']")) != null)
+            try
             {
-                waitElement.IsElementClickable(_driver, By.XPath("//span[text()='Понятно']")).Click();
+                waitElement.IsElementClickable(_driver, By.XPath(_popUpMenuNearSerchLineLocator)).Click();
+            }
+            catch(Exception)
+            {
                 waitElement.IsElementVisible(_driver, By.XPath(_electronikCategoryButtonLocator));
                 waitElement.IsElementClickable(_driver, By.XPath(_electronikCategoryButtonLocator)).Click();
             }
-            waitElement.IsElementVisible(_driver, By.XPath(_electronikCategoryButtonLocator));
-            waitElement.IsElementClickable(_driver, By.XPath(_electronikCategoryButtonLocator)).Click();
+            
         }
 
         public void ClickTabletButton()

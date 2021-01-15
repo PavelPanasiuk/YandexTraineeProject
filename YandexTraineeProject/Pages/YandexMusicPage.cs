@@ -8,6 +8,11 @@ namespace YandexTraineeProject
 {
     public class YandexMusicPage
     {
+        private string _searchLineLocator = "//div[@class='head__search']/*/*/*[1]";
+        private string _popUpMenuCLocator = "//span[@class='d-icon deco-icon d-icon_cross-big  local-icon-theme-black']";
+        private string _firstelemInDropDown = "//div[@data-card='search_suggest'][1]";
+        private string _artistNameLocator = "//h1[@class]";
+        private string _playStopButtonLocator = "//span[text()='Слушать']";
         private IWebDriver _driver;
         WaitElement waitElement = new WaitElement();
 
@@ -18,31 +23,31 @@ namespace YandexTraineeProject
 
         public void ClickSearchLine()
         {
-            waitElement.IsElementClickable(_driver, By.XPath("//div[@class='head__search']/*/*/*[1]")).Click();
+            waitElement.IsElementClickable(_driver, By.XPath(_searchLineLocator)).Click();
         }
 
         public void GetInputToSearchLine(string singer)
         {
-            waitElement.IsElementClickable(_driver, By.XPath("//div[@class='head__search']/*/*/*[1]")).SendKeys(singer);
+            waitElement.IsElementClickable(_driver, By.XPath(_searchLineLocator)).SendKeys(singer);
         }
 
         public void ClosePopUpMenu()
         {
-            waitElement.IsElementClickable(_driver, By.XPath("//span[@class='d-icon deco-icon d-icon_cross-big  local-icon-theme-black']"))
+            waitElement.IsElementClickable(_driver, By.XPath(_popUpMenuCLocator))
                 .Click();
         }
 
-        public void ChooseFirstLineDropDownLine()
+        public void ChooseFirstLineInDropDown()
         {
             Actions actions = new Actions(_driver);
-            waitElement.IsElementExist(_driver, By.XPath("//div[@data-card='search_suggest'][1]"));
+            waitElement.IsElementExist(_driver, By.XPath(_firstelemInDropDown));
             actions.SendKeys(Keys.ArrowDown).SendKeys(Keys.ArrowDown).SendKeys(Keys.Enter).Build().Perform();
         }
 
         public string GetArtistName()
         {
-            Thread.Sleep(500);//Todo не понимаю на что ориентироваться что бы все прогрузилось
-            return waitElement.IsElementExist(_driver, By.XPath("//h1[@class]")).Text;
+            Thread.Sleep(500);
+            return waitElement.IsElementExist(_driver, By.XPath(_artistNameLocator)).Text;
         }
 
         public bool GetListOfPopularAlbums()
@@ -69,7 +74,7 @@ namespace YandexTraineeProject
 
         public void ClickStopAndPlayFirstPopularSong()
         {
-            var elem = waitElement.IsElementVisible(_driver, By.XPath("//span[text()='Слушать']"));
+            var elem = waitElement.IsElementVisible(_driver, By.XPath(_playStopButtonLocator));
             IJavaScriptExecutor js = (IJavaScriptExecutor)_driver;
             js.ExecuteScript("arguments[0].click();", elem);
         }

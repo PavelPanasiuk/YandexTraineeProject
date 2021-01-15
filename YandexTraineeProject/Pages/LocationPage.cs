@@ -1,11 +1,6 @@
 ﻿using OpenQA.Selenium;
-using System.Threading;
-using OpenQA.Selenium.Support.UI;
-using System;
 using OpenQA.Selenium.Interactions;
-using YandexTraineeProject.Data;
-using System.Collections.Generic;
-using System.Linq;
+
 
 namespace YandexTraineeProject
 {

@@ -1,7 +1,4 @@
 ﻿using OpenQA.Selenium;
-using System.Threading;
-using OpenQA.Selenium.Support.UI;
-using System;
 
 namespace YandexTraineeProject
 {

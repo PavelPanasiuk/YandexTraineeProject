@@ -8,6 +8,16 @@ namespace YandexTraineeProject
 {
     public class BrowserTabAction
     {
+        public static void ClearCookes(IWebDriver driver)
+        {
+            SwitchToFirstTab(driver);
+            CLoseLastTab(driver);
+            driver.Manage().Cookies.DeleteAllCookies();
+            driver.Navigate().Refresh();
+           
+
+        }
+
         public static void CLoseLastTab(IWebDriver driver)
         {
             var tabs = driver.WindowHandles;
