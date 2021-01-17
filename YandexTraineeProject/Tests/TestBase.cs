@@ -12,7 +12,7 @@ namespace YandexTraineeProject
         public TestBase()
         {
             //var browser = TestContext.Parameters.Get("browser");
-            var browser = "Firefox";
+            var browser = "Chrome";
 
             if (!Enum.TryParse(browser, out BrowserType browserType))
             {
