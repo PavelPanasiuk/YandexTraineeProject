@@ -21,12 +21,11 @@ namespace YandexTraineeProject
 
         [OneTimeSetUp]
         public void SetUp()
-        {            
-            _testData = _jsonFile.GetTestData();
+        {
             Driver.Manage().Window.Maximize();
             Driver.Navigate().GoToUrl(_testData.YandexUrl);
         }
-        
+
         [TestCase(MainPage.ImageButton, "images")]
         [TestCase(MainPage.MapButton, "maps")]
         [TestCase(MainPage.MarketButton, "market")]
@@ -40,6 +39,6 @@ namespace YandexTraineeProject
             var currentUrl = Driver.SwitchTo().Window(Driver.WindowHandles[1]).Url;
             Assert.IsTrue(currentUrl.Contains(expectedresult));
             BrowserTabAction.CLoseLastTab(Driver);
-        }        
+        }
     }
 }

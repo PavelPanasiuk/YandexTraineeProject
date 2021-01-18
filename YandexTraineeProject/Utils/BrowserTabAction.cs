@@ -1,7 +1,6 @@
 ﻿using OpenQA.Selenium;
 using System.Linq;
 using OpenQA.Selenium.Interactions;
-using System;
 using System.Collections.Generic;
 
 namespace YandexTraineeProject
@@ -14,8 +13,6 @@ namespace YandexTraineeProject
             CLoseLastTab(driver);
             driver.Manage().Cookies.DeleteAllCookies();
             driver.Navigate().Refresh();
-           
-
         }
 
         public static void CLoseLastTab(IWebDriver driver)
