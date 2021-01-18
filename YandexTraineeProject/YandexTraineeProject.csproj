@@ -30,6 +30,9 @@
     <None Update="allureConfig.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="chrome.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Data\TestData.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
