@@ -1,9 +1,13 @@
 ﻿using YandexTraineeProject.Data;
-using NUnit.Framework;
+using NUnit.Framework; 
+using NUnit.Allure.Core;
 
 
 namespace YandexTraineeProject
 {
+    [TestFixture]
+    [AllureNUnit]
+    [Parallelizable]
     public class YandexMusicTest : TestBase
     {
         private MainPage _mainPage;

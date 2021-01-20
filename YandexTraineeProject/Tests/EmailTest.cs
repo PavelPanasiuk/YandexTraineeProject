@@ -6,7 +6,7 @@ using System.Threading;
 namespace YandexTraineeProject
 {
     [AllureNUnit]
-    [TestFixture]
+    [TestFixture]   
     public class ValidLoginPasswordEmailTest : TestBase
     {
         private MainPage _mainPage;
@@ -33,13 +33,13 @@ namespace YandexTraineeProject
 
         [Test]
         public void OpenEmail_CheckUserName()
-        {           
-            _mainPage.ClickEmailLoginButton();          
+        {
+            _mainPage.ClickEmailLoginButton();
             _loginPage.LoginInput(_testData.ValidLogin);
             _loginPage.ClickLoginButton();
             _loginPage.PasswordInput(_testData.ValidPassword);
             _loginPage.ClickLoginButton();
-            var userName = _emailPage.GetUserName();           
+            var userName = _emailPage.GetUserName();
             Driver.Manage().Cookies.DeleteAllCookies();
             Assert.AreEqual(_testData.ValidLogin, userName);
         }
@@ -47,7 +47,7 @@ namespace YandexTraineeProject
         [Test]
         public void QuitFromEmailAccount()
         {
-            
+
             _mainPage.ClickEmailLoginButton();
             BrowserTabAction.SwitchToLastTab(Driver);
             Driver.Manage().Cookies.DeleteAllCookies();
@@ -65,13 +65,14 @@ namespace YandexTraineeProject
 
         [TearDown]
         public void TearDown()
-        {            
-            BrowserTabAction.CLoseLastTab(Driver);           
+        {
+            BrowserTabAction.CLoseLastTab(Driver);
         }
     }
 
     [AllureNUnit]
-    [TestFixture]
+    [TestFixture]  
+    [Parallelizable]
     public class NotValidLoginPasswordEmailTest : TestBase
     {
         private MainPage _mainPage;
@@ -104,7 +105,7 @@ namespace YandexTraineeProject
             Assert.IsNotNull(errorText);
         }
 
-        [Test]
+        [Test]        
         public void UseNotValidPassword()
         {
             _mainPage.ClickEmailLoginButton();

@@ -8,6 +8,7 @@ namespace YandexTraineeProject
 {
     [TestFixture]
     [AllureNUnit]
+    [Parallelizable]
     public class YandexMarketTest : TestBase
     {
         private MainPage _mainPage;

@@ -7,6 +7,7 @@ namespace YandexTraineeProject
 {
     [TestFixture]
     [AllureNUnit]
+    [Parallelizable]
     public class LocationTest : TestBase
     {
         private LocationPage _locationPage;

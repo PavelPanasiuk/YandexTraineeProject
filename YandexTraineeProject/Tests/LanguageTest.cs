@@ -6,6 +6,7 @@ namespace YandexTraineeProject
 {
     [TestFixture]
     [AllureNUnit]
+    [Parallelizable]
     public class LanguageTest : TestBase
     {
         private LanguagePage _languagePage;

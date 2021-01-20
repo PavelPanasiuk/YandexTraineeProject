@@ -6,6 +6,7 @@ namespace YandexTraineeProject
 {
     [TestFixture]
     [AllureNUnit]
+    [Parallelizable]
     public class NavigationBarTest : TestBase
     {
         private MainPage _mainPage;

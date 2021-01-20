@@ -1,7 +1,6 @@
 ﻿using System;
 using OpenQA.Selenium;
 using NUnit.Framework;
-using YandexTraineeProject.Data;
 
 namespace YandexTraineeProject
 {
