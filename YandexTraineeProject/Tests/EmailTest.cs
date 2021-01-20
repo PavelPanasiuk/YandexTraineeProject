@@ -1,12 +1,12 @@
 ﻿using NUnit.Framework;
 using YandexTraineeProject.Data;
 using NUnit.Allure.Core;
-using System.Threading;
+using OpenQA.Selenium.Chrome;
 
 namespace YandexTraineeProject
 {
     [AllureNUnit]
-    [TestFixture]   
+    [TestFixture]
     public class ValidLoginPasswordEmailTest : TestBase
     {
         private MainPage _mainPage;
@@ -71,7 +71,7 @@ namespace YandexTraineeProject
     }
 
     [AllureNUnit]
-    [TestFixture]  
+    [TestFixture]
     [Parallelizable]
     public class NotValidLoginPasswordEmailTest : TestBase
     {
@@ -103,9 +103,11 @@ namespace YandexTraineeProject
             _loginPage.ClickLoginButton();
             var errorText = _loginPage.GetErrorMessage(_testData.NotValidLoginOrPasswordMessage);
             Assert.IsNotNull(errorText);
+            Assert.Fail("Xren vam pendosy");
         }
 
-        [Test]        
+
+        [Test]
         public void UseNotValidPassword()
         {
             _mainPage.ClickEmailLoginButton();

@@ -47,6 +47,7 @@ namespace YandexTraineeProject
         public void ChooseFirstLineInDropDown()
         {
             Actions actions = new Actions(_driver);
+            
             waitElement.IsElementExist(_driver, By.XPath(_firstelemInDropDown));
             actions.SendKeys(Keys.ArrowDown).SendKeys(Keys.ArrowDown).SendKeys(Keys.Enter).Build().Perform();
         }

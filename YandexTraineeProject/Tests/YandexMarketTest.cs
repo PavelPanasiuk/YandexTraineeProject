@@ -86,7 +86,7 @@ namespace YandexTraineeProject
             _yandexMarketPage.ClickFridgeWidthLine();
             _yandexMarketPage.IputFridgeWidth(_testData.FridgeWidth);
             var tagMessage = _yandexMarketPage.GetTagMessage();
-            Assert.IsTrue(tagMessage.Contains(_testData.FridgeWidth));
+            Assert.IsTrue(tagMessage.Contains(_testData.FridgeWidth));           
         }
 
         [TearDown]

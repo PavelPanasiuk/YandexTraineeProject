@@ -11,7 +11,7 @@ namespace YandexTraineeProject
         {
             switch (type)
             {
-                case BrowserType.Chrome:
+                case BrowserType.Chrome:                 
                     return new ChromeDriver();
                 case BrowserType.Firefox:
                     return new FirefoxDriver();
