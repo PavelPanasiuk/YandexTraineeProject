@@ -1,12 +1,22 @@
-﻿pipeline {
-    agent any      
-    
-    stages {             
-    
-            stage('Test') {
+﻿pipeline 
+{
+    agent any   
+    stages 
+    {  
+        stage('Build') 
+        {
             steps 
             {
-                 echo 'dotnet test --filter Name~"SwitchLanguage"...' 
+                echo 'dotnet biuld -c Release' 
+            }
+        }
+    
+
+        stage('Test') 
+        {
+            steps 
+            {
+                echo 'dotnet test --filter Name~"SwitchLanguage"' 
             }
         }
         
