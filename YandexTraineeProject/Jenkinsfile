@@ -1,16 +1,23 @@
 pipeline {
     agent any
-    stages {
+     stages {
         stage('Test') {
             steps {
-                echo 'dotnet test --filter Name~"SwitchLanguage"'
+                echo 'dotnet test '
             }
-        }
+
     }
-    post { 
-        always { 
-            echo 'I will always say Hello again!'
-        }
+
+        stage('Reports') {
+                allure([
+                    includeProperties: false,
+                    jdk: '',
+                    properties: [],
+                    reportBuildPolicy: 'ALWAYS',
+                    results: [[path: 'target/allure-results']]
+                ])
+            }
     }
+    
 }
 
