@@ -7,7 +7,7 @@
         {
             steps 
             {
-                echo "dotnet biuld -c Release"" 
+                echo "dotnet biuld -c Release" 
             }
         }
     
