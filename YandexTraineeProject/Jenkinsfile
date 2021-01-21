@@ -1,7 +1,16 @@
 ﻿pipeline {
     agent any      
     
-    stages {       
+    stages { 
+
+            stage('Encoding') {
+            steps
+            {
+               echo 'chcp 65001'
+            }
+
+            }
+    
             stage('Test') {
             steps 
             {
