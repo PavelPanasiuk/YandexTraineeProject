@@ -11,10 +11,9 @@ pipeline {
         stage('Reports') {
                 allure([
                     includeProperties: false,
-                    jdk: '',
-                    properties: [],
+                    jdk: '',                    
                     reportBuildPolicy: 'ALWAYS',
-                    results: [[path: 'target/allure-results']]
+                    results: [[path: '/YandexTraineeProject/allure-result']]
                 ])
             }
     }
