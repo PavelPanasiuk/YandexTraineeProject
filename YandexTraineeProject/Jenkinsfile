@@ -1,9 +1,9 @@
 pipeline {
     agent any
     stages {
-        stage('Example') {
+        stage('Test') {
             steps {
-                echo 'Hello World'
+                echo 'dotnet test --filter Name~"SwitchLanguage"'
             }
         }
     }
@@ -13,3 +13,4 @@ pipeline {
         }
     }
 }
+
