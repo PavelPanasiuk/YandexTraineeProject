@@ -9,7 +9,7 @@ pipeline {
     }
 
         stage('Reports') {
-                allure([
+                steps([
                     includeProperties: false,
                     jdk: '',                    
                     reportBuildPolicy: 'ALWAYS',
