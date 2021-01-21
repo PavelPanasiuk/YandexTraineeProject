@@ -37,9 +37,6 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Jenkinsfile">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
 
   <!--<ItemGroup>
