@@ -6,7 +6,7 @@
             stage('Test') {
             steps 
             {
-                 sh 'dotnet test --filter Name~"SwitchLanguage"' 
+                 echo 'dotnet test --filter Name~"SwitchLanguage"' 
             }
         }
         
