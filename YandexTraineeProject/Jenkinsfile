@@ -7,7 +7,7 @@
         {
             steps 
             {
-                echo 'dotnet biuld -c Release' 
+                echo "dotnet biuld -c Release"" 
             }
         }
     
@@ -16,7 +16,7 @@
         {
             steps 
             {
-                echo 'dotnet test --filter Name~"SwitchLanguage"' 
+                echo "dotnet test --filter Name~"SwitchLanguage""
             }
         }
         
