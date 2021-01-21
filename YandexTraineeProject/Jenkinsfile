@@ -6,7 +6,7 @@
             stage('Encoding') {
             steps
             {
-               echo 'chcp 65001'
+               sh 'chcp 65001'
             }
 
             }
@@ -14,7 +14,7 @@
             stage('Test') {
             steps 
             {
-                 echo 'dotnet test --filter Name~"SwitchLanguage"'
+                 sh 'dotnet test --filter Name~"SwitchLanguage"'
             }
         }
         
